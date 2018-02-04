@@ -6,7 +6,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
 	entry: {
 		app: ['./src/js/main.js'],
-		vendor: ['vue']
+		vendor: ['vue', 'axios']
 		// screen: [...]
 	},
 	output: {
