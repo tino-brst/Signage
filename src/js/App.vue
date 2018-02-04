@@ -9,7 +9,7 @@
 		name: 'app',
 		data () {
 			return {
-				message: 'Learning Webpack !!'
+				message: 'Learning Webpack (and Git ...)'
 			}
 		}
 	}
