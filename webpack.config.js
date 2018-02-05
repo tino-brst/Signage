@@ -1,7 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
 var inProduction = (process.env.NODE_ENV === 'production');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry: {
@@ -48,6 +49,9 @@ module.exports = {
 	  	}
 	},
 	plugins: [
+		// limpia carpeta de salida (dist) ante cada recompilacion
+		// (evito acumular compilaciones viejas)
+		new CleanWebpackPlugin(['dist']),
 		// junto todas las librerias en uso en un archivo aparte
 		// (en app.js queda solo el codigo de la applicacion)
 		new webpack.optimize.CommonsChunkPlugin({
@@ -59,6 +63,7 @@ module.exports = {
 };
 
 if (inProduction) {
+	// minimiza archivos javascript
 	module.exports.plugins.push(
 		new webpack.optimize.UglifyJsPlugin()
 	);
