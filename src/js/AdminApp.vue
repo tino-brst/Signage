@@ -11,10 +11,11 @@ export default {
 	name: 'App',
 	data () {
 		return {
-			message: 'Learning Webpack (and Git ...)'
+			message: 'Codeigniter + Webpack :D'
 		}
 	},
 	created() {
+		// axios test
 		axios.get('https://jsonplaceholder.typicode.com/posts/1')
 			.then(response => {
 				console.log(response.data);

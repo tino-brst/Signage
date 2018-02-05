@@ -50,6 +50,8 @@ module.exports = {
 	  	}
 	},
 	devServer: {
+		// se va a tener que configurar para redireccionar llamados a la api, etc
+		// (o probar con pasar la base_url desde Codeigniter)
 		// proxy: {
 		// 	"*": "http://localhost:8000/",
 		// }
