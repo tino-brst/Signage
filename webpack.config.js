@@ -7,7 +7,7 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
 	entry: {
 		admin: ['./src/js/admin.js'],
-		vendor: ['vue', 'axios']
+		vendor: ['vue', 'axios', 'vuex']
 		// screen: [...]
 	},
 	output: {
