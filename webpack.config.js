@@ -5,7 +5,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
 	entry: {
-		app: ['./src/js/main.js'],
+		admin: ['./src/js/admin.js'],
 		vendor: ['vue', 'axios']
 		// screen: [...]
 	},
