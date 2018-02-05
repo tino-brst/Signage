@@ -12,6 +12,7 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, './dist'),
+		publicPath: '/dist/',
 		filename: '[name].js'
 	},
 	module: {
@@ -47,6 +48,11 @@ module.exports = {
 		alias: {
 	    	'vue$': 'vue/dist/vue.esm.js'
 	  	}
+	},
+	devServer: {
+		// proxy: {
+		// 	"*": "http://localhost:8000/",
+		// }
 	},
 	plugins: [
 		// limpia carpeta de salida (dist) ante cada recompilacion

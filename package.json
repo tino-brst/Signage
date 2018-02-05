@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "NODE_ENV=development webpack --hide-modules --watch",
-		"production": "NODE_ENV=production webpack --hide-modules"
+		"production": "NODE_ENV=production webpack --hide-modules",
+		"start": "NODE_ENV=development webpack-dev-server --open 'Google Chrome'"
 	},
 	"keywords": [],
 	"author": "",
@@ -24,6 +25,7 @@
 		"vue": "^2.5.13",
 		"vue-loader": "^14.1.1",
 		"vue-template-compiler": "^2.5.13",
-		"webpack": "^3.10.0"
+		"webpack": "^3.10.0",
+		"webpack-dev-server": "^2.11.1"
 	}
 }
