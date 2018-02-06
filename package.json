@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack --hide-modules --watch",
     "production": "NODE_ENV=production webpack --hide-modules",
-    "start": "NODE_ENV=development webpack-dev-server"
+    "start": "NODE_ENV=development webpack-dev-server --no-info"
   },
   "keywords": [],
   "author": "",
