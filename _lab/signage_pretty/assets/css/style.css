@@ -1,0 +1,87 @@
+html {
+	height: 100%;
+	overflow: hidden;
+}
+body {
+	height: 100%;   
+	overflow: hidden;  /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
+	margin: 0px;  /*removes default style*/
+}
+#app {
+	height: 100%;
+	display: flex;  /*enables flex content for its children*/
+	box-sizing: border-box;
+}
+
+#menu {
+	flex: 0 0 16rem;
+	background-color: whitesmoke;
+	border-style: solid;
+	border-width: 0 1px 0 0;
+	border-color: lightgray;
+}	
+#editor {
+	flex: 0 0 16rem;
+	background-color: #3b3b3b;
+	border-style: solid;
+	border-width: 0 0 0 1px;
+	border-color: darkgray;
+}
+#group-explorer {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+#lala {
+	flex: 1;
+	overflow-y: auto;
+}
+
+.group-vc {
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+.selected {
+	border-color: gray;
+	border-width: thin;
+	border-style: solid;
+}
+.message-vc {
+	color:  royalblue;
+	text-align: right;
+}
+
+.nav {
+	left: 0;
+	right: 0;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	border-color: #e6e6e6;
+}
+.nav.has-shadow {
+	box-shadow: 0 2px 3px hsla(0,0%,4%,.1);
+}
+.has-nav {
+	padding-top: 52px;
+}
+
+.path-vc {
+	display: flex;
+	align-items: center;
+}
+.path-vc i {
+	margin: 0.25rem;
+}
+
+.modal-content {
+	width: 20rem;
+}
+.modal-card {
+	width: auto;
+}
+.modal-card-foot {
+	justify-content: flex-end;
+}
