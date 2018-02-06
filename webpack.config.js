@@ -69,6 +69,8 @@ module.exports = {
 		// proxy: {
 		// 	"*": "http://localhost:8000/",
 		// }
+		noInfo: true,
+		overlay: true
 	},
 	// ante un error en el codigo final empaquetado "error en linea 3.532 bundle.js" 
 	// (que incluye varias librerias, etc), anda a saber con que linea del codigo original 
@@ -78,6 +80,15 @@ module.exports = {
 };
 
 if (inProduction) {
+	module.exports.devtool = '#source-map';
+	
+	module.exports.plugins.push(
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: '"production"'
+			}
+		})
+	);
 	// minimiza archivos javascript
 	module.exports.plugins.push(
 		new webpack.optimize.UglifyJsPlugin({
