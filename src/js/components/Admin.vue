@@ -8,7 +8,7 @@
 import axios from 'axios';
 
 export default {
-	name: 'App',
+	name: 'Admin',
 	data() {
 		return {
 			message: 'Codeigniter + Vue + Webpack :D'

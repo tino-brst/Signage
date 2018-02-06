@@ -59,7 +59,9 @@ module.exports = {
 	resolve: {
 		alias: {
 	    	'vue$': 'vue/dist/vue.esm.js'
-	  	}
+	  	},
+	  	// para poder obviar extensiones a la hora de importar (import ... from ...)
+	  	extensions: ['*', '.js', '.vue', '.json']
 	},
 	devServer: {
 		// se va a tener que configurar para redireccionar llamados a la api, etc
