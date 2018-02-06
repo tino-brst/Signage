@@ -44,6 +44,18 @@ module.exports = {
 			}
 		]
 	},
+	plugins: [
+		// limpia carpeta de salida (dist) ante cada recompilacion
+		// (evito acumular compilaciones viejas)
+		new CleanWebpackPlugin(['dist']),
+		// junto todas las librerias en uso en un archivo aparte
+		// (en app.js queda solo el codigo de la applicacion)
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor'
+		}),
+		// extraccion de estilos a archivo aparte
+		new ExtractTextPlugin("[name].css")
+	],
 	resolve: {
 		alias: {
 	    	'vue$': 'vue/dist/vue.esm.js'
@@ -56,24 +68,22 @@ module.exports = {
 		// 	"*": "http://localhost:8000/",
 		// }
 	},
-	plugins: [
-		// limpia carpeta de salida (dist) ante cada recompilacion
-		// (evito acumular compilaciones viejas)
-		new CleanWebpackPlugin(['dist']),
-		// junto todas las librerias en uso en un archivo aparte
-		// (en app.js queda solo el codigo de la applicacion)
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'vendor'
-		}),
-		// extraccion de estilos a archivo aparte
-		new ExtractTextPlugin("[name].css")
-	]
+	// ante un error en el codigo final empaquetado "error en linea 3.532 bundle.js" 
+	// (que incluye varias librerias, etc), anda a saber con que linea del codigo original 
+	// se corresponde. Source maps mapean el codigo original al empaquetado para apuntar 
+	// los errores a su origen ("error en linea 142 archivoTal.js").
+	devtool: '#eval-source-map'
 };
 
 if (inProduction) {
 	// minimiza archivos javascript
 	module.exports.plugins.push(
-		new webpack.optimize.UglifyJsPlugin()
+		new webpack.optimize.UglifyJsPlugin({
+			sourceMap: true,
+			compress: {
+				warnings: false
+			}
+		})
 	);
 	// algunos plugins usan LoaderOptionsPlugin para determinar su salida (css minificado o no, etc)
 	module.exports.plugins.push(

@@ -9,9 +9,9 @@ import axios from 'axios';
 
 export default {
 	name: 'App',
-	data () {
+	data() {
 		return {
-			message: 'Codeigniter + Webpack :D'
+			message: 'Codeigniter + Vue + Webpack :D'
 		}
 	},
 	created() {
