@@ -1,5 +1,6 @@
 <template>
 	<div id="app">
+
 		<h1> {{ currentGroup.name }} </h1>
 
 		<hr>
@@ -15,7 +16,6 @@
 		<ScreenFormVue 
 			v-if="showScreenForm" 
 			@hide="hideScreenForm"/>
-
 		<GroupFormVue 
 			v-if="showGroupForm" 
 			@hide="hideGroupForm"/>
@@ -26,6 +26,8 @@
 
 		<hr>
 
+		<GroupContentVue/>
+
 	</div>
 </template>
 
@@ -35,13 +37,15 @@ import Vuex from 'vuex';
 import PathVue from './components/PathVue';
 import GroupFormVue from './components/GroupFormVue';
 import ScreenFormVue from './components/ScreenFormVue';
+import GroupContentVue from './components/GroupContentVue';
 
 export default {
 	name: 'Admin',
 	components: {
 		PathVue,
 		GroupFormVue,
-		ScreenFormVue
+		ScreenFormVue,
+		GroupContentVue
 	},
 	data() {
 		return {
