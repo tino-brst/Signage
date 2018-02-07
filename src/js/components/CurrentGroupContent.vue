@@ -5,14 +5,14 @@
 		<template v-if="!currentGroupIsEmpty">
 			<div v-if="groups.length">
 				<h4> Groups </h4>
-				<GroupVue 
+				<GroupItem 
 					v-for="group in groups" 
 					:group="group" 
 					:key="group.id"/>
 			</div>
 			<div v-if="screens.length">
 				<h4> Screens </h4>
-				<ScreenVue 
+				<ScreenItem 
 					v-for="screen in screens" 
 					:screen="screen" 
 					:key="screen.id"/>
@@ -26,13 +26,13 @@
 
 <script>
 import Vuex from 'vuex';
-import GroupVue from './GroupVue';
-import ScreenVue from './ScreenVue';
+import GroupItem from './GroupItem';
+import ScreenItem from './ScreenItem';
 
 export default {
 	components: {
-		GroupVue,
-		ScreenVue
+		GroupItem,
+		ScreenItem
 	},
 	computed: {
 		currentGroupIsEmpty() {

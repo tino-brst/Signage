@@ -13,20 +13,20 @@
 		<button @click="showGroupForm = true"> + add group </button>
 		<button @click="showScreenForm = true"> + add screen </button>
 
-		<ScreenFormVue 
+		<ScreenForm 
 			v-if="showScreenForm" 
 			@hide="hideScreenForm"/>
-		<GroupFormVue 
+		<GroupForm 
 			v-if="showGroupForm" 
 			@hide="hideGroupForm"/>
 
 		<hr>
 
-		<PathVue :items="currentGroup.path"/>
+		<CurrentGroupPath :items="currentGroup.path"/>
 
 		<hr>
 
-		<GroupContentVue/>
+		<CurrentGroupContent/>
 
 	</div>
 </template>
@@ -34,17 +34,18 @@
 <script>
 import axios from 'axios';
 import Vuex from 'vuex';
-import PathVue from './components/PathVue';
-import GroupFormVue from './components/GroupFormVue';
-import ScreenFormVue from './components/ScreenFormVue';
-import GroupContentVue from './components/GroupContentVue';
+import CurrentGroupPath from './components/CurrentGroupPath';
+import CurrentGroupContent from './components/CurrentGroupContent';
+import GroupForm from './components/GroupForm';
+import ScreenForm from './components/ScreenForm';
+
 
 export default {
 	components: {
-		PathVue,
-		GroupFormVue,
-		ScreenFormVue,
-		GroupContentVue
+		CurrentGroupPath,
+		GroupForm,
+		ScreenForm,
+		CurrentGroupContent
 	},
 	data() {
 		return {
