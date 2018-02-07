@@ -67,7 +67,7 @@ export default new Vuex.Store({
 	actions: {
 		loadRoot({commit}) {
 			return new Promise((resolve, reject) => {
-				axios.get(apiUrl + 'group', {params: {
+				axios.get(API_URL + 'group', {params: {
 					id: '',
 					includePath: true,
 					includeContent: true
@@ -83,7 +83,7 @@ export default new Vuex.Store({
 		},
 		loadGroup({commit}, id) {
 			return new Promise((resolve, reject) => {
-				axios.get(apiUrl + 'group', {params: {
+				axios.get(API_URL + 'group', {params: {
 					id: id,
 					includePath: true,
 					includeContent: true
@@ -99,7 +99,7 @@ export default new Vuex.Store({
 		},
 		addGroup({commit}, item) {
 			return new Promise((resolve, reject) => {
-				axios.put(apiUrl + 'group', item)
+				axios.put(API_URL + 'group', item)
 					.then(response => {
 						commit('pushItem', response.data.item);
 						resolve(response);
@@ -111,7 +111,7 @@ export default new Vuex.Store({
 		},
 		addScreen({commit}, item) {
 			return new Promise((resolve, reject) => {
-				axios.put(apiUrl + 'screen', item)
+				axios.put(API_URL + 'screen', item)
 					.then(response => {
 						commit('pushItem', response.data.item);
 						resolve(response);
@@ -123,7 +123,7 @@ export default new Vuex.Store({
 		},
 		updateSelectedGroup({commit}, updatedGroup) {
 			return new Promise((resolve, reject) => {
-				axios.post(apiUrl + 'group', updatedGroup)
+				axios.post(API_URL + 'group', updatedGroup)
 					.then(response => {
 						commit('updateSelectedItem', response.data.item);
 						resolve(response);
@@ -135,7 +135,7 @@ export default new Vuex.Store({
 		},
 		updateSelectedScreen({commit}, updatedScreen) {
 			return new Promise((resolve, reject) => {
-				axios.post(apiUrl + 'screen', updatedScreen)
+				axios.post(API_URL + 'screen', updatedScreen)
 					.then(response => {
 						commit('updateSelectedItem', response.data.item);
 						resolve(response);
@@ -147,7 +147,7 @@ export default new Vuex.Store({
 		},
 		deleteGroup({commit}, id) {
 			return new Promise((resolve, reject) => {
-				axios.delete(apiUrl + 'group', {params: {id: id}})
+				axios.delete(API_URL + 'group', {params: {id: id}})
 					.then(response => {
 						commit('removeItem', id);
 						resolve(response);
@@ -159,7 +159,7 @@ export default new Vuex.Store({
 		},
 		deleteScreen({commit}, id) {
 			return new Promise((resolve, reject) => {
-				axios.delete(apiUrl + 'screen', {params: {id: id}})
+				axios.delete(API_URL + 'screen', {params: {id: id}})
 					.then(response => {
 						commit('removeItem', id);
 						resolve(response);
@@ -172,7 +172,7 @@ export default new Vuex.Store({
 		// ----
 		loadPlaylists({commit}) {
 			return new Promise((resolve, reject) => {
-				axios.get(apiUrl + 'playlist', {params: {
+				axios.get(API_URL + 'playlist', {params: {
 					// id: id,
 					includeContent: false
 				}})

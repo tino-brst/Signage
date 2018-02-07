@@ -15,14 +15,8 @@ export default {
 		}
 	},
 	created() {
-		// axios test
-		axios.get('https://jsonplaceholder.typicode.com/posts/1')
-			.then(response => {
-				console.log(response.data);
-			})
-			.catch(e => {
-				console.log(response.data);
-			});
+		// api test
+		this.$store.dispatch('loadRoot');
 	}
 }
 </script>

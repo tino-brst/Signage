@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://pasante.sis.cooperativaobrera.coop/Signage/_lab/signage_old/';
-// $config['base_url'] = 'http://192.168.0.2:8000/';
+$config['base_url'] = 'http://192.168.0.2:8000/_lab/signage_old/';
 
 /*
 |--------------------------------------------------------------------------

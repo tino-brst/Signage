@@ -6,8 +6,15 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry: {
-		admin: ['./src/js/admin.js'],
-		vendor: ['vue', 'axios', 'vuex']
+		admin: [
+			'./src/js/admin.js',
+			// ... css para admin.js
+		],
+		vendor: [
+			'vue', 
+			'axios', 
+			'vuex'
+		]
 		// screen: [...]
 	},
 	output: {
@@ -45,6 +52,13 @@ module.exports = {
 		]
 	},
 	plugins: [
+		// definicion de constantes globales
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: '"development"'
+			},
+			'API_URL': '"index.php/api/"'
+		}),
 		// limpia carpeta de salida (dist) ante cada recompilacion
 		// (evito acumular compilaciones viejas)
 		new CleanWebpackPlugin(['dist']),
@@ -64,11 +78,11 @@ module.exports = {
 	  	extensions: ['*', '.js', '.vue', '.json']
 	},
 	devServer: {
-		// se va a tener que configurar para redireccionar llamados a la api, etc
-		// (o probar con pasar la base_url desde Codeigniter)
-		// proxy: {
-		// 	"*": "http://localhost:8000/",
-		// }
+		// mando solicitudes (incluyendo las que van a la api "/index.php/api/") al servidor php
+		// (y no al webpack-dev-server que solo tiene los archivos compilados)
+		proxy: {
+			"*": "http://localhost:8000",
+		},
 		noInfo: true,
 		overlay: true
 	},
@@ -79,9 +93,11 @@ module.exports = {
 	devtool: '#eval-source-map'
 };
 
+
+// ajustes a realizar al compilar para produccion
 if (inProduction) {
 	module.exports.devtool = '#source-map';
-	
+	// definicion de constantes globales
 	module.exports.plugins.push(
 		new webpack.DefinePlugin({
 			'process.env': {

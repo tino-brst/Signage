@@ -2,4 +2,5 @@
 
 - pasar Vuex store
 - ir pasando componentes
-- 
+	- 
+	- 
