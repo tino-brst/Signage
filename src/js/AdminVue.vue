@@ -5,7 +5,7 @@
 
 		<hr>
 
-		<button 
+		<button
 			@click="loadGroup(currentGroup.parent_id)"
 			:disabled="currentGroupIsRoot"> 
 			&larr;
@@ -40,7 +40,6 @@ import ScreenFormVue from './components/ScreenFormVue';
 import GroupContentVue from './components/GroupContentVue';
 
 export default {
-	name: 'Admin',
 	components: {
 		PathVue,
 		GroupFormVue,

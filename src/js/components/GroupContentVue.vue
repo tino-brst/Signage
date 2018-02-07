@@ -1,31 +1,38 @@
 <template>
-	<div class="vue-component">
-		<div 
-			class="group-content-vc vue-component" 
-			@click="resetSelectedItem">
-			<template v-if="!currentGroupIsEmpty">
-				<!-- AGREGAR V-IF  -->
+	<div 
+		class="vue-component"
+		@click="resetSelectedItem">
+		<template v-if="!currentGroupIsEmpty">
+			<div v-if="groups.length">
 				<h4> Groups </h4>
-				<!-- <group-vc v-for="group in groups" :group="group" :key="group.id"></group-vc> -->
+				<GroupVue 
+					v-for="group in groups" 
+					:group="group" 
+					:key="group.id"/>
+			</div>
+			<div v-if="screens.length">
 				<h4> Screens </h4>
-				<!-- <screen-vc v-for="screen in screens" :screen="screen" :key="screen.id"></screen-vc> -->
-			</template>
-			<template v-else>
-				<h4> No items in this group ... </h4>
-			</template>
-		</div>
+				<ScreenVue 
+					v-for="screen in screens" 
+					:screen="screen" 
+					:key="screen.id"/>
+			</div>
+		</template>
+		<template v-else>
+			<h4> No items in this group ... </h4>
+		</template>
 	</div>
 </template>
 
 <script>
 import Vuex from 'vuex';
-// import GroupVue from './GroupVue';
-// import ScreenVue from './ScreenVue';
+import GroupVue from './GroupVue';
+import ScreenVue from './ScreenVue';
 
 export default {
 	components: {
-		// GroupVue,
-		// ScreenVue
+		GroupVue,
+		ScreenVue
 	},
 	computed: {
 		currentGroupIsEmpty() {
@@ -40,3 +47,11 @@ export default {
 	}
 }
 </script>
+
+<style> 
+.selected {
+	border-color: gray;
+	border-width: thin;
+	border-style: solid;
+}
+</style>
