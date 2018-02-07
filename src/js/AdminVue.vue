@@ -10,15 +10,15 @@
 			:disabled="currentGroupIsRoot"> 
 			&larr;
 		</button>
-		<button @click="showGroupForm = true"> + add group </button>
-		<button @click="showScreenForm = true"> + add screen </button>
+		<button @click="showFormGroup = true"> + add group </button>
+		<button @click="showFormScreen = true"> + add screen </button>
 
-		<ScreenForm 
-			v-if="showScreenForm" 
-			@hide="hideScreenForm"/>
-		<GroupForm 
-			v-if="showGroupForm" 
-			@hide="hideGroupForm"/>
+		<FormScreen 
+			v-if="showFormScreen" 
+			@hide="hideFormScreen"/>
+		<FormGroup 
+			v-if="showFormGroup" 
+			@hide="hideFormGroup"/>
 
 		<hr>
 
@@ -28,6 +28,10 @@
 
 		<CurrentGroupContent/>
 
+		<hr>
+
+		<OptionsEditor/>
+
 	</div>
 </template>
 
@@ -36,21 +40,23 @@ import axios from 'axios';
 import Vuex from 'vuex';
 import CurrentGroupPath from './components/CurrentGroupPath';
 import CurrentGroupContent from './components/CurrentGroupContent';
-import GroupForm from './components/GroupForm';
-import ScreenForm from './components/ScreenForm';
+import FormGroup from './components/FormGroup';
+import FormScreen from './components/FormScreen';
+import OptionsEditor from './components/OptionsEditor';
 
 
 export default {
 	components: {
 		CurrentGroupPath,
-		GroupForm,
-		ScreenForm,
-		CurrentGroupContent
+		CurrentGroupContent,
+		FormGroup,
+		FormScreen,
+		OptionsEditor
 	},
 	data() {
 		return {
-			showScreenForm: false,
-			showGroupForm: false
+			showFormScreen: false,
+			showFormGroup: false
 		}
 	},
 	computed: {
@@ -67,11 +73,11 @@ export default {
 	},
 	methods: {
 		// visibilidad de "formularios"
-		hideScreenForm() {
-			this.showScreenForm = false;
+		hideFormScreen() {
+			this.showFormScreen = false;
 		},
-		hideGroupForm() {
-			this.showGroupForm = false;
+		hideFormGroup() {
+			this.showFormGroup = false;
 		},
 		// Vuex actions
 		...Vuex.mapActions(['loadRoot', 'loadGroup', 'loadPlaylists'])
