@@ -1,16 +1,18 @@
 <template>
 	<div class="vue-component">
 		<h4> Path </h4>
-		<ul v-if="items.length > 0">
+		<ul 
+			id="path" 
+			v-if="items.length > 0">
 			<template v-for="(item, index) in items"> 
 				<li 
 					v-if="index < (items.length - 1)"
 					:key="item.id"
 					@click="loadGroup(item.id)">
-					{{ item.name }}
+					{{ item.name }} /
 				</li>
 			</template>
-			<li><strong> {{ items[items.length - 1].name }} </strong></li> 
+			<li><u> {{ items[items.length - 1].name }} </u></li> 
 		</ul>
 	</div>
 </template>
@@ -31,3 +33,14 @@ export default {
 	}
 }
 </script>
+
+<style>
+#path {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#path li {
+	display: inline;
+}
+</style>
