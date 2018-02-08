@@ -1,6 +1,5 @@
 <template>
 	<div class="vue-component">
-		<h4> Path </h4>
 		<ul 
 			id="path" 
 			v-if="items.length > 0">
@@ -12,7 +11,7 @@
 					{{ item.name }} /
 				</li>
 			</template>
-			<li><u> {{ items[items.length - 1].name }} </u></li> 
+			<li><strong> {{ items[items.length - 1].name }} </strong></li> 
 		</ul>
 	</div>
 </template>

@@ -1,6 +1,6 @@
 <template>
 	<div class="vue-component">
-		<h4> Group Form </h4>
+		<h4> New Group </h4>
 		<form 
 			id="new-group"
 			@submit.prevent="submit">

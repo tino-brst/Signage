@@ -1,6 +1,6 @@
 <template>
 	<div class="vue-component">
-		<h4> Screen Form </h4>
+		<h4> New Screen </h4>
 		<form 
 			id="new-screen" 
 			@submit.prevent="submit">

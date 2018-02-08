@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack --hide-modules --watch",
-    "production": "NODE_ENV=production webpack --hide-modules",
+    "dev": "NODE_ENV=development webpack --hide-modules --progress --watch",
+    "production": "NODE_ENV=production webpack --hide-modules --progress",
     "server": "NODE_ENV=development webpack-dev-server"
   },
   "keywords": [],

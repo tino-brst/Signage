@@ -5,14 +5,14 @@
 		<template v-if="!currentGroupIsEmpty">
 			<div v-if="groups.length">
 				<h4> Groups </h4>
-				<ItemGroup 
+				<ContentGroup 
 					v-for="group in groups" 
 					:group="group" 
 					:key="group.id"/>
 			</div>
 			<div v-if="screens.length">
 				<h4> Screens </h4>
-				<ItemScreen 
+				<ContentScreen 
 					v-for="screen in screens" 
 					:screen="screen" 
 					:key="screen.id"/>
@@ -26,13 +26,13 @@
 
 <script>
 import Vuex from 'vuex';
-import ItemGroup from './ItemGroup';
-import ItemScreen from './ItemScreen';
+import ContentGroup from './ContentGroup';
+import ContentScreen from './ContentScreen';
 
 export default {
 	components: {
-		ItemGroup,
-		ItemScreen
+		ContentGroup,
+		ContentScreen
 	},
 	computed: {
 		currentGroupIsEmpty() {

@@ -13,10 +13,6 @@ class Signage extends CI_Controller {
 		$this -> load -> view('admin');
 	}
 
-	public function new_admin() {
-		$this -> load -> view('new_admin');
-	}
-
 	public function screen($udid) {
 		$data['screen_udid'] = $udid;
 		$this -> load -> view('screen', $data);

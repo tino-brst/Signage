@@ -1,6 +1,6 @@
 <template>
 	<div class="vue-component">
-		<h5> Screen options · {{ newValues.name }} </h5>
+		<h4> {{ screen.name }} </h4>
 		<form @submit.prevent="save">
 			<p>
 				<label> name </label>

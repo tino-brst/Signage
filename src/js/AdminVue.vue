@@ -1,32 +1,19 @@
 <template>
 	<div id="app">
 
-		<h1> {{ currentGroup.name }} </h1>
-
-		<hr>
-
-		<button
-			@click="loadGroup(currentGroup.parent_id)"
-			:disabled="currentGroupIsRoot"> 
-			&larr;
-		</button>
-		<button @click="showFormGroup = true"> + add group </button>
-		<button @click="showFormScreen = true"> + add screen </button>
-
+		<Navbar
+			@add-screen="showFormScreen = true"
+			@add-group="showFormGroup = true"/>
 		<FormScreen 
-			v-if="showFormScreen" 
+			v-if="showFormScreen"
 			@hide="hideFormScreen"/>
 		<FormGroup 
-			v-if="showFormGroup" 
+			v-if="showFormGroup"
 			@hide="hideFormGroup"/>
 
 		<hr>
 
-		<CurrentGroupPath :items="currentGroup.path"/>
-
-		<hr>
-
-		<CurrentGroupContent/>
+		<Content/>
 
 		<hr>
 
@@ -38,20 +25,20 @@
 <script>
 import axios from 'axios';
 import Vuex from 'vuex';
-import CurrentGroupPath from './components/CurrentGroupPath';
-import CurrentGroupContent from './components/CurrentGroupContent';
+import Navbar from './components/Navbar';
+import Content from './components/Content';
+import OptionsEditor from './components/OptionsEditor';
 import FormGroup from './components/FormGroup';
 import FormScreen from './components/FormScreen';
-import OptionsEditor from './components/OptionsEditor';
 
 
 export default {
 	components: {
-		CurrentGroupPath,
-		CurrentGroupContent,
+		Navbar,
+		Content,
+		OptionsEditor,
 		FormGroup,
-		FormScreen,
-		OptionsEditor
+		FormScreen
 	},
 	data() {
 		return {
@@ -60,9 +47,6 @@ export default {
 		}
 	},
 	computed: {
-		currentGroupIsRoot() {
-			return this.currentGroup.path.length == 1;
-		},
 		// Vuex state - mapeo state del store (evito tener que accederlos via this.$store.state...) -
 		...Vuex.mapState(['currentGroup'])
 	},
@@ -80,7 +64,7 @@ export default {
 			this.showFormGroup = false;
 		},
 		// Vuex actions
-		...Vuex.mapActions(['loadRoot', 'loadGroup', 'loadPlaylists'])
+		...Vuex.mapActions(['loadRoot', 'loadPlaylists'])
 	}
 }
 </script>

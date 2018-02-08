@@ -1,6 +1,6 @@
 <template>
 	<div class="vue-component">
-		<h4> Item Editor </h4>
+		<h4> Options </h4>
 		<template v-if="selectedItem">
 			<template v-if="selectedItem.type == 'group'">
 				<OptionsGroup :group="selectedItem"/>
