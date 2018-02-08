@@ -1,7 +1,9 @@
 <template>
 	<div class="vue-component">
 		<h4> Screen Form </h4>
-		<form @submit.prevent="submit">
+		<form 
+			id="new-screen" 
+			@submit.prevent="submit">
 			<p>
 				<label> pin </label>
 				<input 
@@ -26,17 +28,18 @@
 					</option> 
 				</select>
 			</p>
-			<p>	
-				<input 
-					type="submit"
-					value="done"
-					:disabled="!validPin">
-				<input 
-					type="button"
-					value="cancel"
-					@click="$emit('hide')"> 		
-			</p>
 		</form>
+		<p>	
+			<input 
+				type="submit"
+				value="done"
+				form="new-screen"
+				:disabled="!validPin">
+			<input 
+				type="button"
+				value="cancel"
+				@click="$emit('hide')"> 		
+		</p>
 	</div>
 </template>
 
