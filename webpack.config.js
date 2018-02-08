@@ -13,7 +13,8 @@ module.exports = {
 		vendor: [
 			'vue', 
 			'axios', 
-			'vuex'
+			'vuex',
+			'vue-router'
 		]
 		// screen: [...]
 	},

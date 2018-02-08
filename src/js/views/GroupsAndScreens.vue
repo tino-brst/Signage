@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div class="vue-component">
 
 		<Navbar
 			@add-screen="showFormScreen = true"
@@ -23,13 +23,12 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Vuex from 'vuex';
-import Navbar from './components/Navbar';
-import Content from './components/Content';
-import OptionsEditor from './components/OptionsEditor';
-import FormGroup from './components/FormGroup';
-import FormScreen from './components/FormScreen';
+import Navbar from '../components/Navbar';
+import Content from '../components/Content';
+import OptionsEditor from '../components/OptionsEditor';
+import FormGroup from '../components/FormGroup';
+import FormScreen from '../components/FormScreen';
 
 
 export default {
@@ -68,20 +67,3 @@ export default {
 	}
 }
 </script>
-
-<style>
-	html {
-		font-family: sans-serif;
-		background-color: whitesmoke;
-	}
-	.vue-component {
-		background: #ccc6;
-		border-radius: 0.3rem;
-		margin-top:	0.5rem;
-		margin-bottom:	0.5rem;
-		padding: 0.5rem; 
-	}
-	h4 {
-		margin: 0;
-	}
-</style>

@@ -8,8 +8,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<!-- en desarrollo la url base apunta al servidor de webpack (con live-reloading, etc) -->
 	<base href="http://localhost:8080/">
-	<!-- en produccion Codeigniter pasa la url base por parametro -->
-	<!-- <base href="...base_url()..." -->
+	<!-- sin el servidor de webpack Codeigniter deberia pasar la url base por parametro -->
+	<!-- <base href="http://pasante.sis.cooperativaobrera.coop/Signage/"> -->
 	<title> Codeigniter + Webpack + Vue </title>
 	<link rel="stylesheet" type="text/css" href="dist/admin.css">
 </head>

@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import store from './store/store';
-import AdminVue from './AdminVue';
+import router from './router/router';
+import Admin from './Admin';
 
 new Vue({
 	el: '#app',
 	store,
-	render: h => h(AdminVue)
+	router,
+	render: h => h(Admin)
 })
