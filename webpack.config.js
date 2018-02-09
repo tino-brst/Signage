@@ -7,8 +7,8 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
 	entry: {
 		admin: [
-			'./src/js/admin.js',
-			// ... css para admin.js
+			'./src/js/mainAdmin.js',
+			// ... css para mainAdmin.js
 		],
 		vendor: [
 			'vue', 
@@ -82,8 +82,8 @@ module.exports = {
 		// mando solicitudes (incluyendo las que van a la api "/index.php/api/") al servidor php
 		// (y no al webpack-dev-server que solo tiene los archivos compilados)
 		proxy: {
-			"*": "http://pasante.sis.cooperativaobrera.coop/Signage",
-			// "*": "http://localhost:8000",
+			// "*": "http://pasante.sis.cooperativaobrera.coop/Signage",
+			"*": "http://localhost:8000",
 		},
 		noInfo: true,
 		overlay: true

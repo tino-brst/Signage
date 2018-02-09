@@ -5,7 +5,7 @@
 		<template v-if="!currentGroupIsEmpty">
 			<div v-if="groups.length">
 				<h4> Groups </h4>
-				<ContentGroup 
+				<ContentGroup
 					v-for="group in groups" 
 					:group="group" 
 					:key="group.id"/>
