@@ -113,7 +113,7 @@ class Api extends REST_Controller {
 
 		public function playlist_get() {
 			$id = $this -> get('id');
-			$includeContent = filter_var ($this -> get('includeContent'), FILTER_VALIDATE_BOOLEAN);
+			$includeContent = filter_var($this -> get('includeContent'), FILTER_VALIDATE_BOOLEAN);
 			// consulto al modelo
 			$playlists = $this -> model -> getPlaylists($id, $includeContent);
 			$this -> response($playlists, REST_Controller :: HTTP_OK);
