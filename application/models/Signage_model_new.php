@@ -36,17 +36,17 @@ class Signage_model_new extends CI_Model {
 			return $created ? $this -> db -> insert_id() : NULL;
 		}
 
-		public function updatePlaylist($id, $newValues) {
+		public function updatePlaylist($id, $name = NULL, $items = NULL) {
 			// proceso update como transaccion (dado que incluye varios cambios en la BD)
 			$this -> db -> trans_start();
 
-			if ($newValues['name'] != NULL) {
-				$data  = ['name' => $newValues['name']];
+			if ($name !== NULL) {
+				$data  = ['name' => $name];
 				$where = ['id' => $id];
 				$this -> db -> update('playlists', $data, $where);
 			}
-			if ($newValues['items'] != NULL) {
-				$this -> _updatePlaylistItems($id, $newValues['items']);
+			if ($items !== NULL) {
+				$this -> _updatePlaylistItems($id, $items);
 			}
 
 			$this -> db -> trans_complete();
