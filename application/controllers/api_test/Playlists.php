@@ -8,9 +8,7 @@ use Respect\Validation\Exceptions\NestedValidationException;
 class Playlists extends REST_Controller {
 
 	function __construct() {
-		// Construct the parent class
 		parent :: __construct();
-		// Load directory model
 		$this -> load -> model('Signage_model_new','model');
 		$this -> load -> helper('string');
 	}
@@ -28,7 +26,7 @@ class Playlists extends REST_Controller {
 			$this -> response(['errors' => $exception -> getMessagesIndexedByName()], REST_Controller :: HTTP_BAD_REQUEST);
 		}
 
-		// la validacion no afecta a aquellos valores que chequea -> convierto "strings booleanos" a booleanos reales
+		// la validacion no afecta a los valores que chequea -> convierto "strings booleanos" a booleanos reales
 		to_boolean($includeItems);
 
 		// proceso request
