@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require APPPATH . 'libraries/REST_Controller.php';
 use Respect\Validation\Validator as v;
+use Respect\Validation\Exceptions\NestedValidationException;
 
 class Playlists extends REST_Controller {
 
@@ -11,7 +12,6 @@ class Playlists extends REST_Controller {
 		parent :: __construct();
 		// Load directory model
 		$this -> load -> model('Signage_model_new','model');
-		$this -> load -> library('form_validation');
 		$this -> load -> helper('string');
 		// Configure limits on our controller methods
 		// Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
@@ -24,18 +24,16 @@ class Playlists extends REST_Controller {
 		$id = $this -> get('id');
 		$includeItems = $this -> get('includeItems');
 
-		// $number = "123";
-		// $this -> response(v::numeric()->validate($number), REST_Controller :: HTTP_OK);
-
 		// valido la entrada
-		$toValidate = [
-			'id' => $id,
-			'includeItems' => $includeItems
-		];
-		$this -> form_validation -> set_data($toValidate);
-		if ($this -> form_validation -> run('playlists/index_get') == FALSE){
-			$this -> response(['errors' => $this -> validation_errors()], REST_Controller :: HTTP_BAD_REQUEST);
+		try {
+			
+			v :: key('id', v :: numeric(), FALSE) // (string $name, v $validator, boolean $mandatory = true)
+			  -> key('includeItems', v :: boolVal(), FALSE)
+			  -> assert($this -> get());
+		} catch (NestedValidationException $exception) {
+			$this -> response(['errors' => $exception -> getMessagesIndexedByName()], REST_Controller :: HTTP_BAD_REQUEST);
 		}
+
 		// la validacion no afecta a aquellos valores que chequea -> convierto "strings booleanos" a booleanos reales
 		to_boolean($includeItems);
 
@@ -57,9 +55,11 @@ class Playlists extends REST_Controller {
 		$name = $this -> put('name');
 
 		// valido la entrada
-		$this -> form_validation -> set_data(['name' => $name]);
-		if ($this -> form_validation -> run('playlists/index_put') === FALSE){
-			$this -> response(['errors' => $this -> validation_errors()], REST_Controller :: HTTP_BAD_REQUEST);
+		try {
+			v :: key('name', v :: notEmpty(), TRUE) // (string $name, v $validator, boolean $mandatory = true)
+			  -> assert($this -> put());
+		} catch (NestedValidationException $exception) {
+			$this -> response(['errors' => $exception -> getMessagesIndexedByName()], REST_Controller :: HTTP_BAD_REQUEST);
 		}
 
 		// proceso request
@@ -78,16 +78,18 @@ class Playlists extends REST_Controller {
 		$items = $this -> post('items');
 		
 		// valido la entrada
-		$this -> form_validation -> set_data(['id' => $id]);
-		if ($this -> form_validation -> run('playlists/index_post') === FALSE){
-			$this -> response(['errors' => $this -> validation_errors()], REST_Controller :: HTTP_BAD_REQUEST);
+		try {
+			v :: key('id', v :: numeric(), TRUE) // (string $name, v $validator, boolean $mandatory = true)
+			  -> key('name', v :: notEmpty(), FALSE)
+			  -> assert($this -> post());
+		} catch (NestedValidationException $exception) {
+			$this -> response(['errors' => $exception -> getMessagesIndexedByName()], REST_Controller :: HTTP_BAD_REQUEST);
 		}
 
 		// proceso request
 		if ($this -> model -> getPlaylist($id) !== NULL) {
 			if ($this -> model -> updatePlaylist($id, $name, $items)) {
-				$includeItems = TRUE;
-				$data = $this -> model -> getPlaylist($id, $includeItems);
+				$data = $this -> model -> getPlaylist($id, $includeItems = TRUE);
 				$this -> response($data, REST_Controller :: HTTP_OK);
 			} else {
 				$this -> response(['errors' => ['Could not update playlist']], REST_Controller :: HTTP_INTERNAL_SERVER_ERROR);
@@ -101,9 +103,11 @@ class Playlists extends REST_Controller {
 		$id = $this -> query('id');
 
 		// valido la entrada
-		$this -> form_validation -> set_data(['id' => $id]);
-		if ($this -> form_validation -> run('playlists/index_delete') === FALSE){
-			$this -> response(['errors' => $this -> validation_errors()], REST_Controller :: HTTP_BAD_REQUEST);
+		try {
+			v :: key('id', v :: numeric(), TRUE) // (string $name, v $validator, boolean $mandatory = true)
+			  -> assert($this -> query());
+		} catch (NestedValidationException $exception) {
+			$this -> response(['errors' => $exception -> getMessagesIndexedByName()], REST_Controller :: HTTP_BAD_REQUEST);
 		}
 
 		// proceso request

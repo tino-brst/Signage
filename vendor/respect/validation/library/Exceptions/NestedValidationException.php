@@ -213,6 +213,23 @@ class NestedValidationException extends ValidationException implements IteratorA
     }
 
     /**
+     * @see https://github.com/Respect/Validation/issues/664
+     * @return Array 
+     */
+    public function getMessagesIndexedByName()
+    {
+        $returnArray = [];
+        
+        $exceptions = $this -> getIterator();
+
+        foreach ($exceptions as $exception) {
+            $returnArray[$exception -> name][] = $exception->getMessage();
+        }
+
+        return $returnArray;
+    }
+
+    /**
      * @return SplObjectStorage
      */
     public function getRelated()
