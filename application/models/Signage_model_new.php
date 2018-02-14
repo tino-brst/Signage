@@ -41,20 +41,21 @@ class Signage_model_new extends CI_Model {
 
 		// PANTALLAS
 
-			public function createScreen($parentId) {
-				$extraFields = [
-					'playlist_id' => 1,
-					'udid' => rand()
-				];
-				$this -> _appendNewChild($parentId, 'screen', 'dummy screen :P - ' . rand(), $extraFields);
+			public function getScreen($id) {
+				$screen = $this -> _getNode($id, 'screen');
+				return $screen;
 			}
 
-			public function updateScreen($id) {
-				$extraFields = [
-					'playlist_id' => 2,
-					'udid' => rand()
-				];
-				$this -> _updateNode($id, "kylo" . rand(), $extraFields);
+			public function createScreen($parentId, $name, $extraFields) {
+				return $this -> _appendNewChild($parentId, 'screen', $name, $extraFields);
+			}
+
+			public function updateScreen($id, $name, $extraFields) {
+				return $this -> _updateNode($id, $name, $extraFields);
+			}
+
+			public function deleteScreen($id) {
+				return $this -> _deleteNode($id);
 			}
 
 		// Helpers privados
