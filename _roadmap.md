@@ -1,3 +1,8 @@
+# OJO!
+
+- ver el tema de directory_copy, screen_data_copy y referencias claves foraneas!
+- donde pongo las transacciones en el directorio?
+
 # En inicio
 
 - cambiar proxy en devServer
