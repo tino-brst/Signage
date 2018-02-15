@@ -71,19 +71,19 @@ class Directory_model extends CI_Model {
 	}
 
 	private function _getRootNode() {
-		$query = $this -> db -> get_where('groups_copy', ['parent_id' => 0]);
+		$query = $this -> db -> get_where('groups', ['parent_id' => 0]);
 		return $query -> row_array(); 
 	}
 
 	private function _getNode($id, $type) {
 		$where = ['id' => $id];
-		$typeView = $type === 'group' ? 'groups_copy' : 'screens_copy';
+		$typeView = $type === 'group' ? 'groups' : 'screens';
 		$query = $this -> db -> get_where($typeView, $where);
 		return  $query -> row_array();
 	}
 
 	private function _getNodeCore($id) {
-		$query = $this -> db -> get_where('directory_copy', ['id' => $id]);
+		$query = $this -> db -> get_where('directory', ['id' => $id]);
 		return $query -> row_array();
 	}
 
@@ -91,13 +91,13 @@ class Directory_model extends CI_Model {
 		$query = $this -> db 
 			-> where(['parent_id' => $id])
 			-> order_by('name', 'ASC')
-			-> get('groups_copy');
+			-> get('groups');
 		$groups = $query -> result_array();
 
 		$query = $this -> db 
 			-> where(['parent_id' => $id])
 			-> order_by('name', 'ASC')
-			-> get('screens_copy');
+			-> get('screens');
 		$screens = $query -> result_array();
 
 		$children = array_merge($groups, $screens);
@@ -112,7 +112,7 @@ class Directory_model extends CI_Model {
 			-> select('id, name')
 			-> where('left_value' . ' <= ' . $node['left_value'] . ' AND ' . 'right_value' . ' >= ' . $node['right_value'])
 			-> order_by('left_value')
-			-> get('directory_copy');
+			-> get('directory');
 
 		$path = $query -> result_array();
 
@@ -129,10 +129,10 @@ class Directory_model extends CI_Model {
 		// proceso operacion como transaccion (afecta a varias tablas en la BD)
 		$this -> db -> trans_start();
 
-		$this -> db -> insert('directory_copy', $newNode);
+		$this -> db -> insert('directory', $newNode);
 		$newNodeId = $this -> db -> insert_id();
 		$extraFields['id'] = $newNodeId;
-		$typeTable = $type === 'group' ? 'groups_data_copy' : 'screens_data_copy';
+		$typeTable = $type === 'group' ? 'groups_data' : 'screens_data';
 		$this -> db -> insert($typeTable, $extraFields);
 
 		$this -> db -> trans_complete();
@@ -167,10 +167,10 @@ class Directory_model extends CI_Model {
 		$where = ['id' => $id];
 		if ($name !== NULL) {
 			$newValue = ['name' => $name];
-			$this -> db -> update('directory_copy', $newValue, $where);
+			$this -> db -> update('directory', $newValue, $where);
 		}
 		if (!empty($extraFields)) {
-			$typeTable = $node['type'] === 'group' ? 'groups_data_copy' : 'screens_data_copy';
+			$typeTable = $node['type'] === 'group' ? 'groups_data' : 'screens_data';
 			$this -> db -> update($typeTable, $extraFields, $where);
 		}
 
@@ -188,7 +188,7 @@ class Directory_model extends CI_Model {
 			'left_value' . ' >=' => $node['left_value'],
 			'left_value' . ' <=' => $node['right_value'],
 		];
-		$this -> db -> delete('directory_copy', $where);
+		$this -> db -> delete('directory', $where);
 
 		$nodeWidth = $node['left_value'] - $node['right_value'] - 1;
 		$this -> _shiftNodes($node['right_value'] + 1, $nodeWidth);
@@ -203,11 +203,11 @@ class Directory_model extends CI_Model {
 
 		$this -> db -> set('left_value', 'left_value' . '+' . (int) $changeVal, FALSE);
 		$this -> db -> where('left_value' . ' >=', (int) $startingPoint);
-		$this -> db -> update('directory_copy');
+		$this -> db -> update('directory');
 
 		$this -> db -> set('right_value', 'right_value' . '+' . (int) $changeVal, FALSE);
 		$this -> db -> where('right_value' . ' >=', (int) $startingPoint);
-		$this -> db -> update('directory_copy');
+		$this -> db -> update('directory');
 
 		$this -> db -> trans_complete();
 		return $this -> db -> trans_status();
