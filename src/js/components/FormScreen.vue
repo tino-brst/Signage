@@ -68,7 +68,7 @@ export default {
 	},
 	methods: {
 		validatePin() {
-			axios.get(API_URL + 'setup', {params: {pin: this.pin}})
+			axios.get(OLD_API_URL + 'setup', {params: {pin: this.pin}})
 				.then(response => {
 					this.validPin = true;
 					this.setup = response.data;

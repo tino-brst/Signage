@@ -59,7 +59,7 @@ module.exports = {
 				NODE_ENV: '"development"'
 			},
 			'API_URL': '"index.php/api/"',
-			'NEW_API_URL': '"index.php/api_test/"'
+			'OLD_API_URL': '"index.php/api_old/"'
 		}),
 		// limpia carpeta de salida (dist) ante cada recompilacion
 		// (evito acumular compilaciones viejas)
