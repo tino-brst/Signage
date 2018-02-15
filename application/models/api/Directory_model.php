@@ -10,17 +10,21 @@ class Directory_model extends CI_Model {
 
 	// GRUPOS
 
-	public function getGroup($id, $includePath = NULL, $includeContent = NULL) {
-		$group = $this -> _getNode($id, 'group');
+	public function getGroup($id = NULL, $includePath = NULL, $includeContent = NULL) {
+		$group = $id === NULL ? $this -> _getRootNode() : $this -> _getNode($id, 'group');
 		if ($group !== NULL) {
 			if ($includePath) {
-				$group['path'] = $this -> _getPath($id);
+				$group['path'] = $this -> _getPath($group['id']);
 			}
 			if ($includeContent) {
-				$group['content'] = $this -> _getDirectChildren($id);
+				$group['content'] = $this -> _getDirectChildren($group['id']);
 			}						
 		}
 		return $group;
+	}
+
+	public function getRootGroup($includePath = NULL, $includeContent = NULL) {
+		return $this -> getGroup(NULL, $includePath, $includeContent);
 	}
 
 	public function createGroup($parentId, $name, $extraFields) {
@@ -67,7 +71,7 @@ class Directory_model extends CI_Model {
 	}
 
 	private function _getRootNode() {
-		$query = $this -> db -> get_where('directory_copy', ['parent_id' => 0]);
+		$query = $this -> db -> get_where('groups_copy', ['parent_id' => 0]);
 		return $query -> row_array(); 
 	}
 

@@ -20,7 +20,7 @@ class Groups extends REST_Controller {
 
 		// valido la entrada
 		try {
-			v :: key('id', v :: numeric(), TRUE)  // (string $name, v $validator, boolean $mandatory = true)
+			v :: key('id', v :: optional(v :: numeric()), TRUE)  // (string $name, v $validator, boolean $mandatory = true)
 			  -> key('includePath', v :: boolVal(), FALSE)
 			  -> key('includeContent', v :: boolVal(), FALSE)
 			  -> assert($this -> get());
@@ -32,11 +32,17 @@ class Groups extends REST_Controller {
 		to_boolean($includePath);
 		to_boolean($includeContent);
 
-		$data = $this -> model -> getGroup($id, $includePath, $includeContent);
-		if (!empty($data)) {
+		// proceso request
+		if (empty($id)) {
+			$data = $this -> model -> getRootGroup($includePath, $includeContent);
 			$this -> response($data, REST_Controller :: HTTP_OK);
 		} else {
-			$this -> response(['errors' => ['Group not found']], REST_Controller :: HTTP_NOT_FOUND);
+			$data = $this -> model -> getGroup($id, $includePath, $includeContent);
+			if (!empty($data)) {
+				$this -> response($data, REST_Controller :: HTTP_OK);
+			} else {
+				$this -> response(['errors' => ['Group not found']], REST_Controller :: HTTP_NOT_FOUND);
+			}
 		}
 	}
 
