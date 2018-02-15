@@ -9,7 +9,7 @@ class Screens extends REST_Controller {
 
 	function __construct() {
 		parent :: __construct();
-		$this -> load -> model('Signage_model_new','model');
+		$this -> load -> model('api/Directory_model','model');
 		$this -> load -> helper('string');
 	}
 

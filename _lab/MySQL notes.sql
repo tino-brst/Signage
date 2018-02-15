@@ -67,8 +67,7 @@ CREATE TABLE directory (
     date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     left_value INT NOT NULL,
     right_value INT NOT NULL,    
-    PRIMARY KEY (id),
-    UNIQUE (name, type, parent_id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE images (
@@ -169,3 +168,7 @@ SELECT images.location
 FROM    playlists_images JOIN images
 WHERE   playlists_images.image_id = images.id AND playlists_images.playlist_id = X
 ORDER BY position ASC
+
+
+SHOW INDEX FROM tbl_name
+DROP INDEX index_name ON tbl_name

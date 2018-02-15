@@ -1,8 +1,7 @@
 # OJO!
 
-- ! CREAR GROUPS_COPY
 - ver el tema de directory_copy, screen_data_copy y referencias claves foraneas!
-- donde pongo las transacciones en el directorio?
+- dejar de requerir nombres unicos en directorio
 
 # En inicio
 
@@ -10,10 +9,7 @@
 
 # Proximos pasos
 
-- pasar Vuex store
-- ir pasando componentes
-- agrupar botones y path en nav
-- vue-router
-
 - subir archivos
+
+
 
