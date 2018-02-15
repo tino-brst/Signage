@@ -52,10 +52,10 @@ export default {
 		return {
 			pin: "",
 			validPin: false,
-			udid: "",
 			name: "",
 			playlist: "",
-			setup: {}
+			setup: {},
+			udid: ""
 		}
 	},
 	computed: {

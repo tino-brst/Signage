@@ -88,9 +88,21 @@ class Directory_model extends CI_Model {
 	}
 
 	private function _getDirectChildren($id) {
-		$where = ['parent_id' => $id];
-		$query = $this -> db -> get_where('groups_copy', $where);
-		return $query -> result_array();
+		$query = $this -> db 
+			-> where(['parent_id' => $id])
+			-> order_by('name', 'ASC')
+			-> get('groups_copy');
+		$groups = $query -> result_array();
+
+		$query = $this -> db 
+			-> where(['parent_id' => $id])
+			-> order_by('name', 'ASC')
+			-> get('screens_copy');
+		$screens = $query -> result_array();
+
+		$children = array_merge($groups, $screens);
+		
+		return $children;
 	}
 
 	private function _getPath($id) {;
@@ -130,17 +142,19 @@ class Directory_model extends CI_Model {
 
 	private function _appendNewChild($parentId, $type, $name, $extraFields = []) {
 		$parentNode = $this -> _getNodeCore($parentId);
-
-		$parentId = $parentNode['id'];
-		$leftValue = $parentNode['right_value'];
-		$rightValue = $leftValue + 1;
-		$nodeWidth = 2;  // (rightValue - leftValue) + 1 = 2 para todo nuevo nodo
-		
 		$newNodeId = NULL;
-		if ($this -> _shiftNodes($leftValue, $nodeWidth)) {
-			$newNodeId = $this -> _addNode($parentId, $leftValue, $rightValue, $type, $name, $extraFields);
-		}
 
+		if ($parentNode !== NULL) {
+			$parentId = $parentNode['id'];
+			$leftValue = $parentNode['right_value'];
+			$rightValue = $leftValue + 1;
+			$nodeWidth = 2;  // (rightValue - leftValue) + 1 = 2 para todo nuevo nodo
+			
+			if ($this -> _shiftNodes($leftValue, $nodeWidth)) {
+				$newNodeId = $this -> _addNode($parentId, $leftValue, $rightValue, $type, $name, $extraFields);
+			}
+		}
+		
 		return $newNodeId;
 	}
 
