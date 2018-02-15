@@ -58,7 +58,8 @@ module.exports = {
 			'process.env': {
 				NODE_ENV: '"development"'
 			},
-			'API_URL': '"index.php/api/"'
+			'API_URL': '"index.php/api/"',
+			'NEW_API_URL': '"index.php/api_test/"'
 		}),
 		// limpia carpeta de salida (dist) ante cada recompilacion
 		// (evito acumular compilaciones viejas)
