@@ -10,12 +10,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<base href="http://localhost:8080/">
 	<!-- sin el servidor de webpack Codeigniter deberia pasar la url base por parametro -->
 	<!-- <base href="http://pasante.sis.cooperativaobrera.coop/Signage/"> -->
-	<title> Codeigniter + Webpack + Vue </title>
+	<title> Signage - Admin </title>
 	<link rel="stylesheet" type="text/css" href="dist/admin.css">
 </head>
 <body>
 	<div id="app"></div>
-	
 	<script type="text/javascript" src="dist/vendor.js"></script>
 	<script type="text/javascript" src="dist/admin.js"></script>
 </body>

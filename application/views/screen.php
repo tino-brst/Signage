@@ -1,85 +1,24 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> Screen </title>
-	<base href="<?= base_url() ?>">
-	<script src="assets/js/libraries/vue.js"></script>
-	<script src="assets/js/libraries/axios.js"></script>
-	<style type="text/css">
-		html {
-			font-family: sans-serif;
-			background-color: whitesmoke;
-		}
-	</style>
+	<!-- en desarrollo la url base apunta al servidor de webpack (con live-reloading, etc) -->
+	<base href="http://localhost:8080/">
+	<!-- sin el servidor de webpack Codeigniter deberia pasar la url base por parametro -->
+	<!-- <base href="http://pasante.sis.cooperativaobrera.coop/Signage/"> -->
+	<title> Signage - Screen </title>
+	<link rel="stylesheet" type="text/css" href="dist/screen.css">
 </head>
 <body>
-	<div id="app">
-		<h1 v-if="showSetup"> Setup Pin: {{setupPin}} </h1>
-		<img v-else v-for="item in content.items" :src="item.location">
-	</div>
+	<div id="app"></div>
 	<script>
-			var apiUrl = "<?= base_url('index.php/api/') ?>";
-
-			var app = new Vue({
-				el: '#app',
-				components: {
-				},
-				data: {
-					screen: {
-						udid: '<?=$screen_udid?>'
-					},
-					content: {},
-					showSetup: false,
-					setupPin: {}
-				},
-				computed: {
-				},
-				created() {
-					// veo si la pantalla ya es parte del sistema
-					axios.get(apiUrl + 'screen', {params: {
-						udid: this.screen.udid,
-						includeContent: false
-					}})
-					.then(response => {
-						// si ya es parte del sistema, muestro su contenido correspondiente
-						this.screen = response.data;
-						this.loadContent();
-					})
-					.catch(error => {
-						// si no, inicio el modo setup (muestra pin, etc)
-						this.startSetup()
-					});
-
-				},
-				methods: {
-					startSetup() {
-						axios.put(apiUrl + 'setup', {udid: this.screen.udid})
-						.then(response => {
-							this.setupPin = response.data.setup.pin;
-							this.showSetup = true;
-						})
-						.catch(error => {
-							console.log(error.response.data.message);
-						})
-					},
-					loadContent() {
-						// obtengo contenido de la pantalla
-						axios.get(apiUrl + 'playlist', {params: {
-							id: this.screen.playlist_id,
-							includeContent: true
-						}})
-						.then(response => {
-							// si ya es parte del sistema, muestro su contenido correspondiente
-							this.content = response.data;
-						})
-						.catch(error => {
-
-						});
-					}
-				}
-			});
-		</script>
+			var udid = "<?=$screen_udid?>";
+	</script>
+	<script type="text/javascript" src="dist/vendor.js"></script>
+	<script type="text/javascript" src="dist/screen.js"></script>
 </body>
 </html>

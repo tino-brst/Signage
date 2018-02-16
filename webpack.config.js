@@ -7,16 +7,19 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
 	entry: {
 		admin: [
-			'./src/js/mainAdmin.js',
-			// ... css para mainAdmin.js
+			'./src/admin/js/main.js',
+			// ... css para main.js
 		],
+		screen: [
+			'./src/screen/js/main.js',
+			// ... css para main.js
+		], 
 		vendor: [
 			'vue', 
 			'axios', 
 			'vuex',
 			'vue-router'
 		]
-		// screen: [...]
 	},
 	output: {
 		path: path.resolve(__dirname, './dist'),
