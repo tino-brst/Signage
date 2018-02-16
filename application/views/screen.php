@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 	<div id="app"></div>
 	<script>
-			var udid = "<?=$screen_udid?>";
+			var id = "<?=$screen_udid?>";
 	</script>
 	<script type="text/javascript" src="dist/vendor.js"></script>
 	<script type="text/javascript" src="dist/screen.js"></script>

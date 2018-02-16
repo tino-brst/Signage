@@ -1,24 +1,31 @@
 <template>
 	<div id="app">
 		<h1 v-if="showSetup"> Setup Pin: {{ setupPin }} </h1>
-		<img 
+		<div 
 			v-else
-			v-for="item in content.items"
-			:key="item.id"
-			:src="item.location">
+			id="content">
+			<img
+				v-for="item in content.items"
+				:key="item.id"
+				:src="item.location">
+		</div>
 	</div>
 </template>
 
 <script>
 import axios from 'axios';
 
+// CAMBIAR ID A UDID
+
 export default {
 	data() {
 		return {
 			screen: {
-				udid: udid
+				udid: id
 			},
-			content: {},
+			content: {
+				items: []
+			},
 			showSetup: false,
 			setupPin: {}
 		}
@@ -26,7 +33,7 @@ export default {
 	created() {
 		// veo si la pantalla ya es parte del sistema
 		axios.get(API_URL + 'screens', {params: {
-			id: 82
+			id: id
 		}})
 			.then(response => {
 				// si ya es parte del sistema, cargo su contenido
@@ -72,5 +79,15 @@ export default {
 	html {
 		font-family: sans-serif;
 		background-color: whitesmoke;
+	}
+	#content {
+		display: flex;
+	}
+	img {
+		height: 10rem;
+		object-fit: cover;
+		transition: 1s;
+		margin-right: 1rem;
+		border-radius: 0.5rem;
 	}
 </style>
