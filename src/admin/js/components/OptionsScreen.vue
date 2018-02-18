@@ -70,7 +70,14 @@ export default {
 					playlist_id: this.newValues.playlist_id
 				}
 			}
-			this.updateSelectedScreen(updatedScreen);
+			this.updateSelectedScreen(updatedScreen)
+				.then(response => {
+					// anuncio que se actualizo la pantalla
+					this.$socket.emit('screenUpdated', this.screen.udid);
+				})
+				.catch(error => {
+
+				});
 		},
 		cancel() {
 			// restauro el valor inicialmente asignado

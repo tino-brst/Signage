@@ -46,6 +46,13 @@ class Directory_model extends CI_Model {
 		return $screen;
 	}
 
+	public function getScreenFromUDID($udid) {
+		$where = ['udid' => $udid];
+		$typeView = 'screens';
+		$query = $this -> db -> get_where($typeView, $where);
+		return  $query -> row_array();
+	}
+
 	public function createScreen($parentId, $name, $extraFields) {
 		return $this -> _appendNewChild($parentId, 'screen', $name, $extraFields);
 	}

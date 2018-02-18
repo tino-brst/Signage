@@ -1,11 +1,13 @@
 <template>
 	<div id="app">
-		<h1 v-if="showSetup"> Setup Pin: {{ setupPin }} </h1>
-		<div 
+		<div v-if="showSetup">
+			<h1> Setup Pin - {{ setupPin }} </h1>
+		</div>
+		<div
 			v-else
 			id="content">
 			<img
-				v-for="item in content.items"
+				v-for="item in playlist.items"
 				:key="item.id"
 				:src="item.location">
 		</div>
@@ -20,10 +22,8 @@ import axios from 'axios';
 export default {
 	data() {
 		return {
-			screen: {
-				udid: id
-			},
-			content: {
+			screen: {},
+			playlist: {
 				items: []
 			},
 			showSetup: false,
@@ -31,31 +31,33 @@ export default {
 		}
 	},
 	created() {
-		// veo si la pantalla ya es parte del sistema
-		axios.get(API_URL + 'screens', {params: {
-			id: id
-		}})
-			.then(response => {
-				// si ya es parte del sistema, cargo su contenido
-				this.screen = response.data;
-				this.loadContent();
-			})
-			.catch(error => {
-				// si no, inicio el modo setup (muestra pin, etc)
-				this.startSetup()
-			});
-
+		this.$socket.emit('screenConnected', udid);
+		this.updateScreen();
 	},
 	methods: {
-		startSetup() {
-			axios.put(API_URL + 'setup', {udid: this.screen.udid})
+		updateScreen() {
+			// veo si la pantalla ya es parte del sistema
+			axios.get(API_URL + 'screens', {params: {
+				udid: udid
+			}})
 				.then(response => {
-					this.setupPin = response.data.setup.pin;
-					this.showSetup = true;
+					// si ya es parte del sistema, cargo su contenido
+					this.screen = response.data;
+					this.loadContent();
 				})
 				.catch(error => {
-					console.log(error.response.data.message);
-				})
+					// si no, inicio el modo setup (muestra pin, etc)
+					this.startSetup();
+				});
+		},
+		startSetup() {
+			// ...emit(eventName, sentData, callbackFunction)
+			// callbackFunction <- su ejecucion se inicia desde el servidor 
+			this.$socket.emit('screenSetup', udid, (pin) => {
+				// presento pantalla de setup
+				this.setupPin = pin;
+				this.showSetup = true;
+			});
 		},
 		loadContent() {
 			// obtengo contenido de la pantalla
@@ -64,12 +66,17 @@ export default {
 				includeItems: true
 			}})
 				.then(response => {
-					// si ya es parte del sistema, muestro su contenido correspondiente
-					this.content = response.data;
+					this.playlist = response.data;
+					this.showSetup = false;
 				})
 				.catch(error => {
 
 				});
+		}
+	},
+	sockets: {
+		updateScreen() {
+			this.updateScreen();
 		}
 	}
 }
@@ -82,12 +89,14 @@ export default {
 	}
 	#content {
 		display: flex;
+		flex-wrap: wrap;
 	}
 	img {
 		height: 10rem;
 		object-fit: cover;
 		transition: 1s;
 		margin-right: 1rem;
+		margin-bottom: 1rem;
 		border-radius: 0.5rem;
 	}
 </style>

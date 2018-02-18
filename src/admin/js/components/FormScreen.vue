@@ -34,7 +34,7 @@
 				type="submit"
 				value="done"
 				form="new-screen"
-				:disabled="!validPin">
+				:disabled="!isValidPin">
 			<input 
 				type="button"
 				value="cancel"
@@ -51,11 +51,10 @@ export default {
 	data() {
 		return {
 			pin: "",
-			validPin: false,
 			name: "",
 			playlist: "",
-			setup: {},
-			udid: ""
+			udid: "",
+			isValidPin: false,
 		}
 	},
 	computed: {
@@ -68,14 +67,15 @@ export default {
 	},
 	methods: {
 		validatePin() {
-			axios.get(OLD_API_URL + 'setup', {params: {pin: this.pin}})
-				.then(response => {
-					this.validPin = true;
-					this.setup = response.data;
-				})
-				.catch(error => {
-					this.validPin = false;
-				});
+			// obtengo el UDID de la pantalla a partir del pin ingresado
+			this.$socket.emit('screenUdid', this.pin, (udid) => {
+				if (udid) {
+					this.isValidPin = true;
+					this.udid = udid;
+				} else {
+					this.isValidPin = false;
+				}
+			})
 		},
 		submit() {
 			var screen = {
@@ -83,10 +83,14 @@ export default {
 				parentId: this.currentGroup.id,
 				extraFields: {
 					playlist_id: this.playlist,
-					udid: this.setup.udid				}
+					udid: this.udid
+				}
 			}
 			this.addScreen(screen)
 				.then(response => {
+					var newScreen = response.data;
+					// anuncio que se agrego la pantalla
+					this.$socket.emit('screenAdded', newScreen.udid);
 					// oculto el menu
 					this.$emit('hide');
 				})

@@ -5,7 +5,7 @@
 		:class="{ selected: selected }">
 		<li>
 			<span> {{ screen.name }} </span>
-			<button @click.stop="deleteScreen(screen.id)"> delete </button>
+			<button @click.stop="deleteItem"> delete </button>
 		</li>
 	</div>
 </template>
@@ -28,6 +28,16 @@ export default {
 		...Vuex.mapState(['selectedItemId'])
 	},
 	methods: {
+		deleteItem() {
+			this.deleteScreen(this.screen.id)
+				.then(response => {
+					// anuncio que se elimino la pantalla
+					this.$socket.emit('screenDeleted', this.screen.udid);
+				})
+				.catch(error => {
+
+				});
+		},
 		// Vuex actions & mutations
 		...Vuex.mapActions(['deleteScreen']),
 		...Vuex.mapMutations(['setSelectedItem']),

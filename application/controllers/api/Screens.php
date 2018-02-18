@@ -15,16 +15,25 @@ class Screens extends REST_Controller {
 
 	public function index_get() {
 		$id = $this -> get('id');
+		$udid = $this -> get('udid');
 
 		// valido la entrada
 		try {
-			v :: key('id', v :: numeric(), TRUE)  // (string $name, v $validator, boolean $mandatory = true)
+			v :: key('id', v :: numeric(), FALSE)  // (string $name, v $validator, boolean $mandatory = true)
+			  -> key('udid', v :: numeric(), FALSE)
 			  -> assert($this -> get());
 		} catch (NestedValidationException $exception) {
 			$this -> response(['errors' => $exception -> getMessagesIndexedByName()], REST_Controller :: HTTP_BAD_REQUEST);
 		}
 
-		$data = $this -> model -> getScreen($id);
+		// proceso request
+		$data = NULL;
+		if ($id !== NULL) {
+			$data = $this -> model -> getScreen($id);
+		} else {
+			$data = $this -> model -> getScreenFromUDID($udid);
+		}
+
 		if (!empty($data)) {
 			$this -> response($data, REST_Controller :: HTTP_OK);
 		} else {
