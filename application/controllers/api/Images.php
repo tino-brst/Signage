@@ -11,78 +11,76 @@ class Images extends REST_Controller {
 		parent :: __construct();
 		$this -> load -> model('api/Images_model', 'model');
 		$this -> load -> helper(['string', 'form', 'url']);
+		$this -> load -> library('upload');
 	}
 
 	public function index_get() {
 		$id = $this -> get('id');
-		$includeItems = $this -> get('includeItems');
 
 		// valido la entrada
 		try {
 			v :: key('id', v :: numeric(), FALSE) // (string $name, v $validator, boolean $mandatory = true)
-			  -> key('includeItems', v :: boolVal(), FALSE)
 			  -> assert($this -> get());
 		} catch (NestedValidationException $exception) {
 			$this -> response(['errors' => $exception -> getMessagesIndexedByName()], REST_Controller :: HTTP_BAD_REQUEST);
 		}
 
-		// la validacion no afecta a los valores que chequea -> convierto "strings booleanos" a booleanos reales
-		to_boolean($includeItems);
-
 		// proceso request
 		if ($id === NULL) {
-			$data = $this -> model -> getPlaylists($includeItems);
+			$data = $this -> model -> getImages();
 			$this -> response($data, REST_Controller :: HTTP_OK);
 		} else {
-			$data = $this -> model -> getPlaylist($id, $includeItems);
+			$data = $this -> model -> getImage($id);
 			if (!empty($data)) {
 				$this -> response($data, REST_Controller :: HTTP_OK);
 			} else {
-				$this -> response(['errors' => ['Playlist not found']], REST_Controller :: HTTP_NOT_FOUND);
+				$this -> response(['errors' => ['Image not found']], REST_Controller :: HTTP_NOT_FOUND);
 			}
 		}
 	}
 
-	public function index_put() {
-		$file = $this -> put('file');
+	public function index_post() {
+		// formateo imagen
 
-		$config['upload_path']          = './public/images';
-		$config['allowed_types']        = 'gif|jpg|png';
-		$config['max_size']             = 100;
-		$config['max_width']            = 3000;
-		$config['max_height']           = 3000;
+		$uploadedImages = [];
+		$files = $_FILES;
+		$filesCount = count($_FILES['images']['name']);
+		
+		for($i =0 ; $i < $filesCount; $i++) {           
+			$_FILES['images']['name'] = $files['images']['name'][$i];
+			$_FILES['images']['type'] = $files['images']['type'][$i];
+			$_FILES['images']['tmp_name'] = $files['images']['tmp_name'][$i];
+			$_FILES['images']['error'] = $files['images']['error'][$i];
+			$_FILES['images']['size'] = $files['images']['size'][$i];    
 
-		$this->load->library('upload', $config);
-		$data = $this->upload->do_upload();
+			$saved = $this -> upload -> do_upload('images');
+			if ($saved) {
+				$imageInfo = $this -> upload -> data();
+				$imageId = $this -> model -> addImage($imageInfo['file_name']);
+				if ($imageId !== NULL) {
+					$uploadedImages[] = $this -> model -> getImage($imageId);
+				}
+			}
+		}
 
-		// if ( ! $this->upload->do_upload('file'))
-		// {
-		// 	$this -> response(['errors' => ['error']], REST_Controller :: HTTP_INTERNAL_SERVER_ERROR);
-		// }
-		// else
-		// {
-		// 	$data = array('upload_data' => $this->upload->data());
-		// 	$this -> response($data, REST_Controller :: HTTP_CREATED);
-		// }
+		$this -> response($uploadedImages, REST_Controller :: HTTP_CREATED);
 
-		// valido la entrada
-		// try {
-		// 	v :: key('file', v :: image(), TRUE) // (string $name, v $validator, boolean $mandatory = true)
-		// 	  -> assert($this -> put());
-		// } catch (NestedValidationException $exception) {
-		// 	$this -> response(['errors' => $exception -> getMessagesIndexedByName()], REST_Controller :: HTTP_BAD_REQUEST);
-		// }
 
-		$this -> response($data, REST_Controller :: HTTP_CREATED);
 
-		// proceso request
-		// $newPlaylistId = $this -> model -> createPlaylist($name);
-		// if ($newPlaylistId != NULL) {
-		// 	$data = $this -> model -> getPlaylist($newPlaylistId);
-		// 	$this -> response($data, REST_Controller :: HTTP_CREATED);
-		// } else {
-		// 	$this -> response(['errors' => ['Could not create playlist']], REST_Controller :: HTTP_INTERNAL_SERVER_ERROR);
-		// }
+		// guardo en carpeta para imagenes y cargo en la BD
+		$saved = $this -> upload -> do_upload('image');
+		if ($saved) {
+			$imageInfo = $this -> upload -> data();
+			$imageId = $this -> model -> addImage($imageInfo['file_name']);
+			if ($imageId !== NULL) {
+				$data = $this -> model -> getImage($imageId);
+				$this -> response($data, REST_Controller :: HTTP_CREATED);
+			}
+		}
+
+		// la imagen no se guardo con exito
+		$errors = $this -> upload -> display_errors($openingTag = '', $closingTag = '');
+		$this -> response(['errors' => [$errors]], REST_Controller :: HTTP_INTERNAL_SERVER_ERROR);
 	}
 
 	public function index_delete() {
@@ -97,14 +95,14 @@ class Images extends REST_Controller {
 		}
 
 		// proceso request
-		if ($this -> model -> getPlaylist($id) !== NULL) {
-			if ($this -> model -> deletePlaylist($id)) {
+		if ($this -> model -> getImage($id) !== NULL) {
+			if ($this -> model -> deleteImage($id)) {
 				$this -> response(NULL, REST_Controller :: HTTP_NO_CONTENT);
 			} else {
-				$this -> response(['errors' => ['Could not delete playlist']], REST_Controller :: HTTP_INTERNAL_SERVER_ERROR);
+				$this -> response(['errors' => ['Could not delete image']], REST_Controller :: HTTP_INTERNAL_SERVER_ERROR);
 			}
 		} else {
-			$this -> response(['errors' => ['Playlist not found']], REST_Controller :: HTTP_NOT_FOUND);
+			$this -> response(['errors' => ['Image not found']], REST_Controller :: HTTP_NOT_FOUND);
 		}
 	}
 }

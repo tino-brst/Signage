@@ -2,19 +2,20 @@
 	<div class="vue-component">
 		<h4> Upload File </h4>
 		<form 
-			id="upload-file"
+			id="upload-files"
 			@submit.prevent="submit">
 			<p>
 				<input
 					type="file"
-					@change="updateFilePath($event.target.value)">
+					multiple
+					@change="updateFiles($event.target.files)">
 			</p>
 		</form>
 		<p>
-			<input 
+			<input
 				type="submit" 
 				value="upload"
-				form="upload-file">
+				form="upload-files">
 		</p>
 	</div>
 </template>
@@ -25,27 +26,25 @@ import axios from 'axios';
 export default {
 	data() {
 		return {
-			filePath: ""
+			files: []
 		}
 	},
 	methods: {
 		submit() {
 			var data = new FormData();
-			data.set('userfile', this.filePath);
-			axios({
-				method: 'put',
-				url: API_URL + 'images',
-				data: data
+			this.files.forEach((file) => {
+				data.append('images[]', file, file.name);
 			})
+			axios.post(API_URL + 'images', data)
 				.then(response => {
-					console.log('uploaded! :D ' + this.filePath)
+				
 				})
 				.catch(error => {
 					
 				})
 		},
-		updateFilePath(path) {
-			this.filePath = path;
+		updateFiles(files) {
+			this.files = Array.from(files);
 		}
 	}
 }
