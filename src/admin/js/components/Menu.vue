@@ -3,6 +3,7 @@
 		<nav>
 			<router-link to="/groups-and-screens"> Groups And Screens </router-link>
 			<router-link to="/playlists"> Playlists </router-link>
+			<router-link to="/files"> Files </router-link>
 		</nav>
 	</div>
 </template>
