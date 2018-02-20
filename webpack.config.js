@@ -61,8 +61,7 @@ module.exports = {
 			'process.env': {
 				NODE_ENV: '"development"'
 			},
-			'API_URL': '"index.php/api/"',
-			'OLD_API_URL': '"index.php/api_old/"'
+			'API_URL': '"index.php/api/"'
 		}),
 		// limpia carpeta de salida (dist) ante cada recompilacion
 		// (evito acumular compilaciones viejas)
@@ -86,8 +85,8 @@ module.exports = {
 		// mando solicitudes (incluyendo las que van a la api "/index.php/api/") al servidor php
 		// (y no al webpack-dev-server que solo tiene los archivos compilados)
 		proxy: {
-			// "*": "http://pasante.sis.cooperativaobrera.coop/Signage",
-			"*": "http://localhost:8000",
+			"*": "http://pasante.sis.cooperativaobrera.coop/Signage",
+			// "*": "http://localhost:8000",
 		},
 		noInfo: true,
 		overlay: true

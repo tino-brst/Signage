@@ -2,9 +2,11 @@
 	<div 
 		class="vue-component"
 		@click="resetSelectedItem">
+
 		<div 
 			id="content"
 			v-if="!currentGroupIsEmpty">
+
 			<div v-if="groups.length">
 				<h2> Groups </h2>
 				<ContentGroup
@@ -12,6 +14,7 @@
 					:group="group" 
 					:key="group.id"/>
 			</div>
+
 			<div v-if="screens.length">
 				<h2> Screens </h2>
 				<ContentScreen 
@@ -19,10 +22,13 @@
 					:screen="screen" 
 					:key="screen.id"/>
 			</div>
+			
 		</div>
+
 		<div v-else>
 			<h4> No items in this group ... </h4>
 		</div>
+
 	</div>
 </template>
 
@@ -51,12 +57,12 @@ export default {
 </script>
 
 <style scoped> 
-h2 {
-	margin: 0;
-}
-.selected {
-	border-color: gray;
-	border-width: thin;
-	border-style: solid;
-}
+	.selected {
+		border-color: gray;
+		border-width: thin;
+		border-style: solid;
+	}
+	#content .vue-component:hover {
+		background-color: #b9b9b966;
+	}
 </style>

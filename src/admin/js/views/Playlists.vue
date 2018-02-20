@@ -1,10 +1,75 @@
 <template>
 	<div class="vue-component">
-		<h1> Playlists </h1>
+
+		<h2> Playlists </h2>
+
+		<p>
+			<button @click="showForm = true"> + new playlist </button>
+		</p>
+
+		<PlaylistsForm
+			v-if="showForm"
+			@hide="showForm = false"/>
+
+		<hr>
+
+		<div 
+			id="playlists"
+			v-if="playlists.length > 0">
+			<PlaylistsItem
+				v-for="playlist in playlists" 
+				:playlist="playlist"
+				:key="playlist.id"/>
+		</div>
+
+		<div v-else>
+			<h4> No playlists created yet ... </h4>
+		</div>
+
+		<template v-if="showEditor">
+			<hr>
+			<PlaylistsEditor/>
+		</template>
+
 	</div>
 </template>
 
 <script>
+import Vuex from 'vuex';
+import PlaylistsItem from '../components/PlaylistsItem';
+import PlaylistsForm from '../components/PlaylistsForm';
+import PlaylistsEditor from '../components/PlaylistsEditor';
+import ImagesItem from '../components/ImagesItem'
+
 export default {
+	components: {
+		PlaylistsItem,
+		PlaylistsForm,
+		PlaylistsEditor,
+		ImagesItem
+	},
+	data() {
+		return {
+			showForm: false,
+			showEditor: false
+		}
+	},
+	computed: {
+		// Vuex state
+		...Vuex.mapState(['playlists', 'images'])
+	},
+	created() {
+		this.loadPlaylists();
+	},
+	methods: {
+		// Vuex actions
+		...Vuex.mapActions(['loadPlaylists'])
+	}
 }
 </script>
+
+<style>
+	#playlists > .vue-component:hover {
+		background-color: #b9b9b966;
+	}
+</style>

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import GroupsAndScreens from '../views/GroupsAndScreens';
 import Playlists from '../views/Playlists';
-import Files from '../views/Files';
+import Images from '../views/Images';
 
 Vue.use(VueRouter);
 
@@ -20,8 +20,8 @@ var routes = [
 		component: Playlists
 	},
 	{
-		path: '/files',
-		component: Files
+		path: '/images',
+		component: Images
 	}
 ]
 

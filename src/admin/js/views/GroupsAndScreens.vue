@@ -1,6 +1,8 @@
 <template>
 	<div class="vue-component">
 
+		<h2> Groups and Screens </h2>
+
 		<Navbar
 			@add-screen="showFormScreen = true"
 			@add-group="showFormGroup = true"/>

@@ -73,7 +73,7 @@ class Directory_model extends CI_Model {
 			$parentId = 0;
 			$leftValue = 1;
 			$rightValue = 2;
-			$this -> _addNode($parentId, $leftValue, $rightValue, 'group', 'Groups and Screens');
+			$this -> _addNode($parentId, $leftValue, $rightValue, 'group', 'Home');
 		}
 	}
 

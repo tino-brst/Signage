@@ -17,7 +17,10 @@ export default new Vuex.Store({
 			content: []
 		},
 		selectedItemId: null,
+
 		playlists: [],
+		selectedPlaylistId: null,
+
 		images: []
 	},
 	getters: {
@@ -30,6 +33,10 @@ export default new Vuex.Store({
 		selectedItem: state => {
 			var index = state.currentGroup.content.findIndex(item => { return item.id === state.selectedItemId });
 			return state.selectedItemId != null ? state.currentGroup.content[index] : null;
+		},
+		selectedPlaylist: state => {
+			var index = state.playlists.findIndex(item => { return item.id === state.selectedPlaylistId });
+			return state.selectedPlaylistId != null ? state.playlists[index] : null;
 		}
 	},
 	mutations: {
@@ -64,6 +71,20 @@ export default new Vuex.Store({
 		// Playlists
 		setPlaylists(state, playlists) {
 			state.playlists = playlists;
+		},
+		setSelectedPlaylist(state, id) {
+			state.selectedPlaylistId = id;
+		},
+		pushPlaylist(state, playlist) {
+			state.playlists.push(playlist);
+		},
+		removePlaylist(state, id) {
+			var index = state.playlists.findIndex(item => { return item.id === id});
+			state.playlists.splice(index, 1);
+			// si el item eliminado es el seleccionado limpio la seleccion
+			if (id === state.selectedPlaylistId) {
+				state.selectedPlaylistId = null;
+			}
 		},
 
 		// Imagenes
@@ -195,6 +216,30 @@ export default new Vuex.Store({
 				axios.get(API_URL + 'playlists')
 					.then(response => {
 						commit('setPlaylists', response.data);
+						resolve(response);
+					})
+					.catch(error => {
+						reject(error);
+					})
+			});
+		},
+		addPlaylist({commit}, playlist) {
+			return new Promise((resolve, reject) => {
+				axios.put(API_URL + 'playlists', playlist)
+					.then(response => {
+						commit('pushPlaylist', response.data);
+						resolve(response);
+					})
+					.catch(error => {
+						reject(error);
+					})
+			});
+		},
+		deletePlaylist({commit}, id) {
+			return new Promise((resolve, reject) => {
+				axios.delete(API_URL + 'playlists', {params: {id: id}})
+					.then(response => {
+						commit('removePlaylist', id);
 						resolve(response);
 					})
 					.catch(error => {
