@@ -20,12 +20,15 @@ class Images_model extends CI_Model {
 	}
 
 	public function addImage($location) {
-		$created = $this -> db -> insert('images', ['location' => $location]);
+		$created = $this -> db -> insert('images', ['location' => 'public/images/' . $location]);
 		return $created ? $this -> db -> insert_id() : NULL;
 	}
 
 	public function deleteImage($id) {
 		$where = ['id' => $id];
-		return $this -> db -> delete('images', $where);
+		$image = $this -> db -> get_where('images', $where) -> row_array();
+		$deleted = unlink(FCPATH . $image['location']);
+		$deleted &= $this -> db -> delete('images', $where);
+		return $deleted;
 	}
 }

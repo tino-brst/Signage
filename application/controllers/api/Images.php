@@ -40,8 +40,6 @@ class Images extends REST_Controller {
 	}
 
 	public function index_post() {
-		// formateo imagen
-
 		$uploadedImages = [];
 		$files = $_FILES;
 		$filesCount = count($_FILES['images']['name']);
@@ -62,25 +60,7 @@ class Images extends REST_Controller {
 				}
 			}
 		}
-
 		$this -> response($uploadedImages, REST_Controller :: HTTP_CREATED);
-
-
-
-		// guardo en carpeta para imagenes y cargo en la BD
-		$saved = $this -> upload -> do_upload('image');
-		if ($saved) {
-			$imageInfo = $this -> upload -> data();
-			$imageId = $this -> model -> addImage($imageInfo['file_name']);
-			if ($imageId !== NULL) {
-				$data = $this -> model -> getImage($imageId);
-				$this -> response($data, REST_Controller :: HTTP_CREATED);
-			}
-		}
-
-		// la imagen no se guardo con exito
-		$errors = $this -> upload -> display_errors($openingTag = '', $closingTag = '');
-		$this -> response(['errors' => [$errors]], REST_Controller :: HTTP_INTERNAL_SERVER_ERROR);
 	}
 
 	public function index_delete() {

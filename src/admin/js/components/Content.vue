@@ -2,25 +2,27 @@
 	<div 
 		class="vue-component"
 		@click="resetSelectedItem">
-		<template v-if="!currentGroupIsEmpty">
+		<div 
+			id="content"
+			v-if="!currentGroupIsEmpty">
 			<div v-if="groups.length">
-				<h4> Groups </h4>
+				<h2> Groups </h2>
 				<ContentGroup
 					v-for="group in groups" 
 					:group="group" 
 					:key="group.id"/>
 			</div>
 			<div v-if="screens.length">
-				<h4> Screens </h4>
+				<h2> Screens </h2>
 				<ContentScreen 
 					v-for="screen in screens" 
 					:screen="screen" 
 					:key="screen.id"/>
 			</div>
-		</template>
-		<template v-else>
+		</div>
+		<div v-else>
 			<h4> No items in this group ... </h4>
-		</template>
+		</div>
 	</div>
 </template>
 
@@ -48,7 +50,10 @@ export default {
 }
 </script>
 
-<style> 
+<style scoped> 
+h2 {
+	margin: 0;
+}
 .selected {
 	border-color: gray;
 	border-width: thin;

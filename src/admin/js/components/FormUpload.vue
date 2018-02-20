@@ -1,8 +1,8 @@
 <template>
 	<div class="vue-component">
-		<h4> Upload File </h4>
+		<h4> Upload Images </h4>
 		<form 
-			id="upload-files"
+			id="upload-images"
 			@submit.prevent="submit">
 			<p>
 				<input
@@ -11,16 +11,24 @@
 					@change="updateFiles($event.target.files)">
 			</p>
 		</form>
+		<ul>
+			<li 
+				v-for="(file, index) in files"
+				:key="index">
+				{{ file.name }}
+			</li>
+		</ul>
 		<p>
 			<input
 				type="submit" 
 				value="upload"
-				form="upload-files">
+				form="upload-images">
 		</p>
 	</div>
 </template>
 
 <script>
+import Vuex from 'vuex';
 import axios from 'axios';
 
 export default {
@@ -31,21 +39,17 @@ export default {
 	},
 	methods: {
 		submit() {
-			var data = new FormData();
+			var images = new FormData();
 			this.files.forEach((file) => {
-				data.append('images[]', file, file.name);
+				images.append('images[]', file, file.name);
 			})
-			axios.post(API_URL + 'images', data)
-				.then(response => {
-				
-				})
-				.catch(error => {
-					
-				})
+			this.addImages(images);
 		},
 		updateFiles(files) {
 			this.files = Array.from(files);
-		}
+		},
+		// Vuex actions
+		...Vuex.mapActions(['addImages'])
 	}
 }
 </script>

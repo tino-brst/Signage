@@ -17,8 +17,8 @@ export default new Vuex.Store({
 			content: []
 		},
 		selectedItemId: null,
-		// ----
-		playlists: []
+		playlists: [],
+		images: []
 	},
 	getters: {
 		groups: state => {
@@ -33,6 +33,7 @@ export default new Vuex.Store({
 		}
 	},
 	mutations: {
+		// Grupos y Pantallas
 		setCurrentGroup(state, group) {
 			state.currentGroup = group;
 			// el cambio de grupo limpia la seleccion
@@ -59,9 +60,24 @@ export default new Vuex.Store({
 				state.selectedItemId = null;
 			}
 		},
-		// ----
+
+		// Playlists
 		setPlaylists(state, playlists) {
 			state.playlists = playlists;
+		},
+
+		// Imagenes
+		setImages(state, images) {
+			state.images = images
+		},
+		pushImages(state, images) {
+			images.forEach((image) => {
+				state.images.push(image);
+			})
+		},
+		removeImage(state, id) {
+			var index = state.images.findIndex(item => { return item.id === id});
+			state.images.splice(index, 1);
 		}
 	},
 	actions: {
@@ -134,6 +150,7 @@ export default new Vuex.Store({
 					})
 			});
 		},
+
 		// Pantallas
 		addScreen({commit}, item) {
 			return new Promise((resolve, reject) => {
@@ -171,12 +188,51 @@ export default new Vuex.Store({
 					})
 			});
 		},
+
 		// Playlists
 		loadPlaylists({commit}) {
 			return new Promise((resolve, reject) => {
 				axios.get(API_URL + 'playlists')
 					.then(response => {
 						commit('setPlaylists', response.data);
+						resolve(response);
+					})
+					.catch(error => {
+						reject(error);
+					})
+			});
+		},
+
+		// Imagenes
+		loadImages({commit}) {
+			return new Promise((resolve, reject) => {
+				axios.get(API_URL + 'images')
+					.then(response => {
+						commit('setImages', response.data);
+						resolve(response);
+					})
+					.catch(error => {
+						reject(error);
+					})
+			});
+		},
+		addImages({commit}, images) {
+			return new Promise((resolve, reject) => {
+				axios.post(API_URL + 'images', images)
+					.then(response => {
+						commit('pushImages', response.data);
+						resolve(response);
+					})
+					.catch(error => {
+						reject(error);
+					})
+			});
+		},
+		deleteImage({commit}, id) {
+			return new Promise((resolve, reject) => {
+				axios.delete(API_URL + 'images', {params: {id: id}})
+					.then(response => {
+						commit('removeImage', id);
 						resolve(response);
 					})
 					.catch(error => {
