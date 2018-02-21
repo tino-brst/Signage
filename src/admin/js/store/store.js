@@ -75,13 +75,17 @@ export default new Vuex.Store({
 		setSelectedPlaylist(state, id) {
 			state.selectedPlaylistId = id;
 		},
+		updateSelectedPlaylist(state, updatedPlaylist) {
+			var index = state.playlists.findIndex(playlist => { return playlist.id === state.selectedPlaylistId });
+			Vue.set(state.playlists, index, updatedPlaylist);
+		},
 		pushPlaylist(state, playlist) {
 			state.playlists.push(playlist);
 		},
 		removePlaylist(state, id) {
-			var index = state.playlists.findIndex(item => { return item.id === id});
+			var index = state.playlists.findIndex(playlist => { return playlist.id === id});
 			state.playlists.splice(index, 1);
-			// si el item eliminado es el seleccionado limpio la seleccion
+			// si la playlist eliminado es el seleccionado limpio la seleccion
 			if (id === state.selectedPlaylistId) {
 				state.selectedPlaylistId = null;
 			}
@@ -213,7 +217,9 @@ export default new Vuex.Store({
 		// Playlists
 		loadPlaylists({commit}) {
 			return new Promise((resolve, reject) => {
-				axios.get(API_URL + 'playlists')
+				axios.get(API_URL + 'playlists', {params: {
+					includeItems: true
+				}})
 					.then(response => {
 						commit('setPlaylists', response.data);
 						resolve(response);
@@ -228,6 +234,18 @@ export default new Vuex.Store({
 				axios.put(API_URL + 'playlists', playlist)
 					.then(response => {
 						commit('pushPlaylist', response.data);
+						resolve(response);
+					})
+					.catch(error => {
+						reject(error);
+					})
+			});
+		},
+		updateSelectedPlaylist({commit}, updatedPlaylist) {
+			return new Promise((resolve, reject) => {
+				axios.post(API_URL + 'playlists', updatedPlaylist)
+					.then(response => {
+						commit('updateSelectedPlaylist', response.data);
 						resolve(response);
 					})
 					.catch(error => {

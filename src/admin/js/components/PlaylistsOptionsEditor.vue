@@ -1,33 +1,26 @@
 <template>
 	<div class="vue-component">
 		<h4> Options </h4>
-		<template v-if="selectedItem">
-			<template v-if="selectedItem.type == 'group'">
-				<OptionsGroup :group="selectedItem"/>
-			</template>
-			<template v-else>
-				<OptionsScreen :screen="selectedItem"/>
-			</template>
+		<template v-if="selectedPlaylist">
+			<OptionsPlaylist :playlist="selectedPlaylist"/>
 		</template>
 		<template v-else>
-			Select an item to edit
+			Select a playlist to edit
 		</template>
 	</div>
 </template>
 
 <script>
 import Vuex from 'vuex';
-import OptionsGroup from './OptionsGroup'
-import OptionsScreen from './OptionsScreen'
+import OptionsPlaylist from './OptionsPlaylist'
 
 export default {
 	components: {
-		OptionsGroup,
-		OptionsScreen
+		OptionsPlaylist
 	},
 	computed: {
 		// Vuex getters
-		...Vuex.mapGetters(['selectedItem'])
+		...Vuex.mapGetters(['selectedPlaylist'])
 	}
 }
 </script>

@@ -36,4 +36,9 @@ export default {
 	h4, h2 {
 		margin: 0;
 	}
+	hr {
+		border: 0;
+		height: 1px;
+		background: #c5c5c5;
+	}
 </style>

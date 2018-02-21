@@ -21,15 +21,13 @@
 				:playlist="playlist"
 				:key="playlist.id"/>
 		</div>
-
 		<div v-else>
 			<h4> No playlists created yet ... </h4>
 		</div>
 
-		<template v-if="showEditor">
-			<hr>
-			<PlaylistsEditor/>
-		</template>
+		<hr> 
+
+		<PlaylistsOptionsEditor/>
 
 	</div>
 </template>
@@ -38,20 +36,20 @@
 import Vuex from 'vuex';
 import PlaylistsItem from '../components/PlaylistsItem';
 import PlaylistsForm from '../components/PlaylistsForm';
-import PlaylistsEditor from '../components/PlaylistsEditor';
+import PlaylistsOptionsEditor from '../components/PlaylistsOptionsEditor';
 import ImagesItem from '../components/ImagesItem'
 
 export default {
 	components: {
 		PlaylistsItem,
 		PlaylistsForm,
-		PlaylistsEditor,
+		PlaylistsOptionsEditor,
 		ImagesItem
 	},
 	data() {
 		return {
 			showForm: false,
-			showEditor: false
+			showEditor: true
 		}
 	},
 	computed: {
