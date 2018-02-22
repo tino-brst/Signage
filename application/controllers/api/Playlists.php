@@ -57,7 +57,7 @@ class Playlists extends REST_Controller {
 		// proceso request
 		$newPlaylistId = $this -> model -> createPlaylist($name);
 		if ($newPlaylistId != NULL) {
-			$data = $this -> model -> getPlaylist($newPlaylistId);
+			$data = $this -> model -> getPlaylist($newPlaylistId, $includeItems = TRUE);
 			$this -> response($data, REST_Controller :: HTTP_CREATED);
 		} else {
 			$this -> response(['errors' => ['Could not create playlist']], REST_Controller :: HTTP_INTERNAL_SERVER_ERROR);

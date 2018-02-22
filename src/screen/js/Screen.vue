@@ -7,8 +7,8 @@
 			v-else
 			id="content">
 			<img
-				v-for="item in playlist.items"
-				:key="item.id"
+				v-for="(item, index) in playlist.items"
+				:key="index"
 				:src="item.location">
 		</div>
 	</div>
@@ -77,6 +77,11 @@ export default {
 	sockets: {
 		updateScreen() {
 			this.updateScreen();
+		},
+		playlistUpdated(playlistId) {
+			if (playlistId === this.screen.playlist_id) {
+				this.loadContent();
+			}
 		}
 	}
 }

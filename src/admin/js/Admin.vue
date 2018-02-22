@@ -29,12 +29,22 @@ export default {
 	.vue-component {
 		background: #ccc6;
 		border-radius: 0.3rem;
-		margin-top:	0.5rem;
+		padding: 0.5rem;
+		margin-top: 0.5rem;
 		margin-bottom: 0.5rem;
-		padding: 0.5rem 1rem;
+		overflow: hidden;
 	}
-	h4, h2 {
-		margin: 0;
+	h4 {
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+	} 
+	h2 {
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+	}
+	p {
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
 	}
 	hr {
 		border: 0;

@@ -1,13 +1,15 @@
 <template>
 	<div class="vue-component">
 		<NavbarPath :items="currentGroup.path"/>
-		<button
-			@click="loadGroup(currentGroup.parent_id)"
-			:disabled="currentGroupIsRoot"> 
-			&larr;
-		</button>
-		<button @click="$emit('add-group')"> + add group </button>
-		<button @click="$emit('add-screen')"> + add screen </button>
+		<p>
+			<button
+				@click="loadGroup(currentGroup.parent_id)"
+				:disabled="currentGroupIsRoot"> 
+				&larr;
+			</button>
+			<button @click="$emit('add-group')"> + add group </button>
+			<button @click="$emit('add-screen')"> + add screen </button>
+		</p>
 	</div>
 </template>
 

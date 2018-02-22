@@ -3,6 +3,7 @@
 		<h4> Options </h4>
 		<template v-if="selectedPlaylist">
 			<OptionsPlaylist :playlist="selectedPlaylist"/>
+			<ImagePicker/>
 		</template>
 		<template v-else>
 			Select a playlist to edit
@@ -12,11 +13,13 @@
 
 <script>
 import Vuex from 'vuex';
-import OptionsPlaylist from './OptionsPlaylist'
+import OptionsPlaylist from './OptionsPlaylist';
+import ImagePicker from './ImagePicker';
 
 export default {
 	components: {
-		OptionsPlaylist
+		OptionsPlaylist,
+		ImagePicker
 	},
 	computed: {
 		// Vuex getters

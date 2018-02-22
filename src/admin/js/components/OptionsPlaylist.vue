@@ -1,6 +1,8 @@
 <template>
 	<div class="vue-component">
+
 		<h4> {{ playlist.name }} </h4>
+
 		<form 
 			id="playlist-options"
 			@submit.prevent="save">
@@ -18,11 +20,12 @@
 		<label> items </label>
 		<Draggable 
 			id="playlistItems"
-			:list="newValues.items">
+			:list="newValues.items"
+			:options="{group: {name: 'items', pull: false, put: true}}">
 			<div 
 				class="playlistItem"
-				v-for="item in newValues.items"
-				:key="item.id">
+				v-for="(item, index) in newValues.items"
+				:key="index">
 				<img :src="item.location">
 			</div>
 		</Draggable>
@@ -74,7 +77,11 @@ export default {
 				name: this.newValues.name,
 				items: this.newValues.items
 			}
-			this.updateSelectedPlaylist(updatedPlaylist);
+			this.updateSelectedPlaylist(updatedPlaylist)
+				.then( response => {
+					// anuncio cambio en la playlist
+					this.$socket.emit('playlistUpdated', response.data.id);
+				});
 		},
 		cancel() {
 			// restauro el valor inicialmente asignado
@@ -91,6 +98,7 @@ export default {
 		display: flex;
 		margin-top: 0.5rem;
 		margin-bottom: 0.5rem;
+		min-height: 5rem;
 	}
 	#playlistItems img {
 		height: 5rem;
@@ -99,6 +107,17 @@ export default {
 	}
 	.playlistItem {
 		display: flex;
-		margin-right:1rem;
+		padding: 0.5rem;
+	}
+	.sortable-ghost {
+		opacity:  0.5;
+	}
+	.sortable-chosen {
+		background-color: #ffffff00;
+	}
+	.sortable-chosen>img{
+		border-style: solid;
+		border-width: 2px;
+		border-color: white;
 	}
 </style>

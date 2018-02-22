@@ -11,7 +11,7 @@
 					@change="updateFiles($event.target.files)">
 			</p>
 		</form>
-		<ul>
+		<ul v-if="files.length > 0 ">
 			<li 
 				v-for="(file, index) in files"
 				:key="index">
@@ -22,7 +22,8 @@
 			<input
 				type="submit" 
 				value="upload"
-				form="upload-images">
+				form="upload-images"
+				:disabled="files.length === 0">
 		</p>
 	</div>
 </template>
