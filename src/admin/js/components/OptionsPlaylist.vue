@@ -22,12 +22,11 @@
 			id="playlistItems"
 			:list="newValues.items"
 			:options="{group: {name: 'items', pull: false, put: true}}">
-			<div 
-				class="playlistItem"
+			<PlaylistTimelineItem
 				v-for="(item, index) in newValues.items"
-				:key="index">
-				<img :src="item.location">
-			</div>
+				:key="index"
+				:item="item"
+				@delete="deleteTimelineItem(index)"/>
 		</Draggable>
 
 		<p>
@@ -47,10 +46,12 @@
 import Vuex from 'vuex';
 import axios from 'axios';
 import Draggable from 'vuedraggable';
+import PlaylistTimelineItem from './PlaylistTimelineItem';
 
 export default {
 	components: {
-		Draggable
+		Draggable,
+		PlaylistTimelineItem
 	},
 	props: {
 		playlist: {
@@ -87,6 +88,9 @@ export default {
 			// restauro el valor inicialmente asignado
 			this.newValues = JSON.parse(JSON.stringify(this.playlist));
 		},
+		deleteTimelineItem(index) {
+			this.newValues.items.splice(index, 1);
+		},
 		// Vuex actions
 		...Vuex.mapActions(['updateSelectedPlaylist'])
 	}
@@ -98,26 +102,12 @@ export default {
 		display: flex;
 		margin-top: 0.5rem;
 		margin-bottom: 0.5rem;
+		overflow: scroll;
 		min-height: 5rem;
 	}
 	#playlistItems img {
 		height: 5rem;
 		object-fit: cover;
 		border-radius: 0.5rem;
-	}
-	.playlistItem {
-		display: flex;
-		padding: 0.5rem;
-	}
-	.sortable-ghost {
-		opacity:  0.5;
-	}
-	.sortable-chosen {
-		background-color: #ffffff00;
-	}
-	.sortable-chosen>img{
-		border-style: solid;
-		border-width: 2px;
-		border-color: white;
 	}
 </style>

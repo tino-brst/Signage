@@ -32,7 +32,6 @@ export default {
 		padding: 0.5rem;
 		margin-top: 0.5rem;
 		margin-bottom: 0.5rem;
-		overflow: hidden;
 	}
 	h4 {
 		margin-top: 0.5rem;
