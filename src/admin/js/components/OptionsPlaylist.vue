@@ -9,8 +9,8 @@
 			<p>
 				<label> name </label>
 				<input 
+					v-model="newValues.name"
 					type="text" 
-					v-model="newValues.name" 
 					placeholder="new name">
 			</p>
 		</form>

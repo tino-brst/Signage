@@ -1,8 +1,8 @@
 <template>
 	<div 
+		:class="{ selected: selected }"
 		class="vue-component" 
-		@click.stop="setSelectedItem(screen.id)" 
-		:class="{ selected: selected }">
+		@click.stop="setSelectedItem(screen.id)">
 		<li>
 			<span> {{ screen.name }} </span>
 			<button @click.stop="deleteItem"> delete </button>

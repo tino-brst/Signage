@@ -1,10 +1,15 @@
 <template>
 	<div id="app">
 
-		<transition name="setup">
+		<transition 
+			appear
+			name="fade" 
+			mode="out-in">
+
 			<div
 				v-if="showSetup"
-				id="setup">
+				id="setup"
+				key="1">
 				<div id="pin">
 					<h4> pin de configuración </h4>
 					<h1> {{ formattedSetupPin }} </h1>
@@ -17,20 +22,22 @@
 					<img src="public/assets/images/footer.png">
 				</div>
 			</div>
-		</transition>
+		
+			<div
+				v-else
+				id="content"
+				key="2" 
+				@click="nextItem">
+				<template v-if="availableItems">
+					<transition name="items-slide">
+						<img
+							:key="playlist.items[currentItemIndex].id"
+							:src="playlist.items[currentItemIndex].location">
+					</transition>
+				</template>
+			</div>
 
-		<div
-			v-if="!showSetup"
-			id="content"
-			@click="nextItem">
-			<transition-group name="items-slide">
-				<img
-					v-for="(item, index) in playlist.items"
-					v-show="index === currentItemIndex"
-					:key="index"
-					:src="item.location">
-			</transition-group>
-		</div>
+		</transition>
 
 	</div>
 </template>
@@ -41,8 +48,8 @@ import axios from 'axios';
 export default {
 	data() {
 		return {
-			screen: {},
-			playlist: {},
+			screen: null,
+			playlist: null,
 			currentItemIndex: 0,
 			showSetup: false,
 			setupPin: ''
@@ -51,6 +58,9 @@ export default {
 	computed: {
 		formattedSetupPin() {
 			return this.setupPin.split('').join(' ');
+		},
+		availableItems() {
+			return this.playlist !== null && this.playlist.items.length > 0;
 		}
 	},
 	created() {
@@ -76,6 +86,7 @@ export default {
 		startSetup() {
 			// ...emit(eventName, sentData, callbackFunction)
 			// callbackFunction <- su ejecucion se inicia desde el servidor 
+			this.screen = null;
 			this.$socket.emit('screenSetup', udid, (pin) => {
 				// presento pantalla de setup
 				this.setupPin = pin;
@@ -106,7 +117,7 @@ export default {
 			this.updateScreen();
 		},
 		playlistUpdated(playlistId) {
-			if (playlistId === this.screen.playlist_id) {
+			if (screen !== null && playlistId === this.screen.playlist_id) {
 				this.loadContent();
 			}
 		}
@@ -120,24 +131,26 @@ export default {
 		width: 100%;
 		margin: 0;
 		padding: 0;
-		overflow: hidden;
-		font-family: Avenir;
 		background-color: black;
+		overflow: hidden;
+		font-family: 'Work Sans', sans-serif;
 	}
+
 	#setup {
 		height: 100%;
 		color: lightgray;
-		background-color: #212121;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		background: linear-gradient(127deg, #333333, #000000);
 	}
 	#pin {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		width: 100%;
 	}
 	#pin h4 {
 		opacity: 0.5;
@@ -147,7 +160,9 @@ export default {
 	}
 	#pin h1 {
 		font-size: 10rem;
+		text-align: center;
 		margin: 0;
+		width: 100%;
 		color: white;
 	}
 
@@ -165,7 +180,7 @@ export default {
 		font-weight: lighter;
 		margin-top: 0;
 		margin-right: 1rem;
-		margin-bottom: 2rem;
+		margin-bottom: 2.1rem;
 		opacity: 0.9;
 	}
 	#brand img {
@@ -191,8 +206,9 @@ export default {
 		width: 100%;
 		object-fit: cover;
 	}
+
 	.items-slide-enter-active, .items-slide-leave-active {
-		transition: all 3s;
+		transition: all 2.5s;
 	}
 	.items-slide-enter {
 		transform: translateY(100%);
@@ -212,16 +228,10 @@ export default {
 		z-index: 1;
 	}
 
-	.setup-enter-active, .setup-leave-active {
-		transition: all 1s;
+	.fade-enter-active, .fade-leave-active {
+		transition: all 0.5s ease;
 	}
-	.setup-enter {
-		opacity:  0;
-	}
-	.setup-enter-to {
-		opacity: 1;
-	}
-	.setup-leave-to {
+	.fade-enter, .fade-leave-to {
 		opacity: 0;
 	}
 </style>

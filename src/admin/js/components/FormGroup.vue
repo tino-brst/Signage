@@ -7,8 +7,8 @@
 			<p>
 				<label for="name"> name </label>
 				<input 
-					type="text"
-					v-model="name">
+					v-model="name"
+					type="text">
 			</p>
 		</form>
 		<p>

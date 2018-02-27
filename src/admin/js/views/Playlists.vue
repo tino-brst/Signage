@@ -14,8 +14,8 @@
 		<hr>
 
 		<div 
-			id="playlists"
-			v-if="playlists.length > 0">
+			v-if="playlists.length > 0"
+			id="playlists">
 			<PlaylistsItem
 				v-for="playlist in playlists" 
 				:playlist="playlist"

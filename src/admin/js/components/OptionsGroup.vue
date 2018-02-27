@@ -4,9 +4,9 @@
 		<form @submit.prevent="save">
 			<p>
 				<label> name </label>
-				<input 
-					type="text" 
+				<input
 					v-model="newValues.name" 
+					type="text"  
 					placeholder="new name">
 			</p>
 			<p>

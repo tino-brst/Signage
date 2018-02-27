@@ -7,15 +7,15 @@
 			<p>
 				<label> pin </label>
 				<input 
-					type="text" 
-					v-model="pin" 
+					v-model="pin"
+					type="text"  
 					@blur="validatePin">
 			</p>
 			<p>
 				<label> name </label>
 				<input 
-					type="text" 
-					v-model="name">
+					v-model="name"
+					type="text">
 			</p>
 			<p>
 				<label> content </label> 
@@ -30,11 +30,11 @@
 			</p>
 		</form>
 		<p>	
-			<input 
+			<input
+				:disabled="!isValidPin"
 				type="submit"
 				value="done"
-				form="new-screen"
-				:disabled="!isValidPin">
+				form="new-screen">
 			<input 
 				type="button"
 				value="cancel"

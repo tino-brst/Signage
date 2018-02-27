@@ -20,10 +20,10 @@
 		</ul>
 		<p>
 			<input
+				:disabled="files.length === 0"
 				type="submit" 
 				value="upload"
-				form="upload-images"
-				:disabled="files.length === 0">
+				form="upload-images">
 		</p>
 	</div>
 </template>

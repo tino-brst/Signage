@@ -1,8 +1,8 @@
 <template>
 	<div 
+		:class="{ selected: selected }"
 		class="vue-component" 
-		@click.stop="setSelectedItem(group.id)" 
-		:class="{ selected: selected }">
+		@click.stop="setSelectedItem(group.id)">
 		<li>
 			<span> {{ group.name }} </span>
 			<button @click.stop="deleteGroup(group.id)"> delete </button>

@@ -3,8 +3,8 @@
 		<NavbarPath :items="currentGroup.path"/>
 		<p>
 			<button
-				@click="loadGroup(currentGroup.parent_id)"
-				:disabled="currentGroupIsRoot"> 
+				:disabled="currentGroupIsRoot"
+				@click="loadGroup(currentGroup.parent_id)"> 
 				&larr;
 			</button>
 			<button @click="$emit('add-group')"> + add group </button>

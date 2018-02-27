@@ -1,8 +1,8 @@
 <template>
 	<div 
+		:class="{ selected: selected }"
 		class="vue-component"
-		@click.stop="setSelectedPlaylist(playlist.id)" 
-		:class="{ selected: selected }">
+		@click.stop="setSelectedPlaylist(playlist.id)">
 		<li>
 			<span> {{ playlist.name }} </span>
 			<button @click.stop="deletePlaylist(playlist.id)"> delete </button>

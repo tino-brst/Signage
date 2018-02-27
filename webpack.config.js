@@ -85,8 +85,8 @@ module.exports = {
 		// mando solicitudes (incluyendo las que van a la api "/index.php/api/") al servidor php
 		// (y no al webpack-dev-server que solo tiene los archivos compilados)
 		proxy: {
-			// "*": "http://pasante.sis.cooperativaobrera.coop/Signage",
-			"*": "http://localhost:8000",
+			"*": "http://pasante.sis.cooperativaobrera.coop/Signage",
+			// "*": "http://localhost:8000",
 		},
 		noInfo: true,
 		overlay: true

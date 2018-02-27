@@ -1,8 +1,8 @@
 <template>
 	<div class="vue-component">
 		<ul 
-			id="path" 
-			v-if="items.length > 0">
+			v-if="items.length > 0"
+			id="path">
 			<template v-for="(item, index) in items"> 
 				<li 
 					v-if="index < (items.length - 1)"

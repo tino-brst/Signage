@@ -7,10 +7,10 @@
 			id="imagePicker"
 			:list="images"
 			:options="{group: {name: 'items', pull: 'clone', put: false}, sort: false}">
-			<div 
-				class="imagePickerItem"
+			<div
 				v-for="(image, index) in images"
-				:key="index">
+				:key="index"
+				class="imagePickerItem">
 				<img :src="image.location">
 			</div>
 		</Draggable>

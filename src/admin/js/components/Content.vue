@@ -4,8 +4,8 @@
 		@click="resetSelectedItem">
 
 		<div 
-			id="content"
-			v-if="!currentGroupIsEmpty">
+			v-if="!currentGroupIsEmpty"
+			id="content">
 
 			<div v-if="groups.length">
 				<h2> Groups </h2>

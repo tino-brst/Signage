@@ -6,9 +6,9 @@
 			@submit.prevent="submit">
 			<p>
 				<label for="name"> name </label>
-				<input 
-					type="text"
-					v-model="name">
+				<input
+					v-model="name"
+					type="text">
 			</p>
 		</form>
 		<p>
