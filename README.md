@@ -70,7 +70,7 @@ Respecto a las pantallas, durante la inicializacion de la base de datos se crear
 
 ## Esquema de la Base de Datos
 
-![diagrama_bd](documentacion/diagrama_db.png)
+![diagrama_bd](documentacion/diagrama_bd.png)
 
 ## Agregando nuevas pantallas
 
