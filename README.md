@@ -37,8 +37,8 @@ Ademas de poder asignar contenido a cada pantalla individualmente, se implemento
 __Creacion e inicializacion de la Base de Datos__
 
 1. Crear base de datos con el nombre `signage`
-2. Crear tablas y vistas base a partir del [codigo adjunto](db_definition.sql)
-3. Crear [contenido para el demo](db_demo_items.sql)
+2. Crear tablas y vistas base a partir del [codigo adjunto](./db_definition.sql)
+3. Crear [contenido para el demo](./db_demo_items.sql)
 
 __Servidor de WebSockets__
 
