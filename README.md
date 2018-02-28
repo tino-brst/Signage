@@ -6,7 +6,7 @@ La idea del desarrollo es poder mostrar contenido (imagenes, videos, etc) en dis
 2. Crear una playlist que contenga esas imagenes
 3. Asignar esa playlist a una o mas pantallas
 
-Todos esos pasos se realizan desde el **administrador**, donde se organiza el contenido y se lo asigna a las distintas **pantallas**. 
+Todos esos pasos se realizan desde el __administrador__, donde se organiza el contenido y se lo asigna a las distintas __pantallas__. 
 
 
 
@@ -68,11 +68,11 @@ Respecto a las pantallas, durante la inicializacion de la base de datos se crear
 
 
 
+## Esquema de la Base de Datos
+
+![diagrama_bd](documentacion/diagrama_bd.png)
+
 ## Agregando nuevas pantallas
-
-
-
-
 
 
 
@@ -86,7 +86,7 @@ Respecto a las pantallas, durante la inicializacion de la base de datos se crear
 
 
 
-## Esquema de la Base de Datos
+
 
 
 
