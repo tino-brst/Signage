@@ -10,7 +10,7 @@
 					placeholder="new name">
 			</p>
 			<p>
-				<label> playlist </label>
+				<label> content </label>
 				<select v-model="newValues.playlist_id">
 					<option 
 						v-for="playlist in playlists" 
