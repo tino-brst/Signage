@@ -143,7 +143,7 @@ export default {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		background: #101010;
+		background: linear-gradient(127deg, #333333, #000000);
 	}
 	#pin {
 		display: flex;
