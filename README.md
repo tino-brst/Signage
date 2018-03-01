@@ -16,7 +16,7 @@ __Tabla de contenidos__
 
 
 
-## Introducción
+## Introduccion
 
 La idea del desarrollo es poder mostrar contenido (imágenes, videos, etc) en distintas pantallas de la forma mas sencilla posible, sin conocimientos técnicos por parte del usuario. Si quisiera mostrar una serie de imágenes por pantalla, los pasos a seguir (a grandes rasgos) serian los siguientes:
 

@@ -31,9 +31,9 @@
 				<template v-if="availableItems">
 					<transition name="items-slide">
 						<div 
-							class="image" 
 							:style="{ 'background-image': 'url(' + playlist.items[currentItemIndex].location + ')' }"
-							:key="playlist.items[currentItemIndex].id"/>
+							:key="playlist.items[currentItemIndex].id"
+							class="image"/>
 					</transition>
 				</template>
 			</div>
