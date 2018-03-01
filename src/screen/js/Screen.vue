@@ -30,9 +30,10 @@
 				@click="nextItem">
 				<template v-if="availableItems">
 					<transition name="items-slide">
-						<img
-							:key="playlist.items[currentItemIndex].id"
-							:src="playlist.items[currentItemIndex].location">
+						<div 
+							class="image" 
+							:style="{ 'background-image': 'url(' + playlist.items[currentItemIndex].location + ')' }"
+							:key="playlist.items[currentItemIndex].id"/>
 					</transition>
 				</template>
 			</div>
@@ -200,12 +201,18 @@ export default {
 		height: 1rem;
 		width: 100%;
 	}
-	#content img {
+	#content .image {
 		position: absolute;
 		height: 100%;
 		width: 100%;
-		object-fit: cover;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;  
 	}
+
 
 	.items-slide-enter-active, .items-slide-leave-active {
 		transition: all 2.5s;

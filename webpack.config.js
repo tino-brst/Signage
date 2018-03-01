@@ -18,7 +18,8 @@ module.exports = {
 			'vue', 
 			'axios', 
 			'vuex',
-			'vue-router'
+			'vue-router',
+			'babel-polyfill'
 		]
 	},
 	output: {
@@ -84,6 +85,7 @@ module.exports = {
 	devServer: {
 		// mando solicitudes (incluyendo las que van a la api "/index.php/api/") al servidor php
 		// (y no al webpack-dev-server que solo tiene los archivos compilados)
+		port: 8089,
 		proxy: {
 			// "*": "http://pasante.sis.cooperativaobrera.coop/Signage",
 			"*": "http://0.0.0.0:8000",

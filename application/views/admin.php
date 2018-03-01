@@ -7,9 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
 	<!-- en desarrollo la url base apunta al servidor de webpack (con live-reloading, etc) -->
-	<base href="http://localhost:8080/">
-	<!-- sin el servidor de webpack Codeigniter deberia pasar la url base por parametro -->
-	<!-- <base href="http://pasante.sis.cooperativaobrera.coop/Signage/"> -->
+	<base href="http://0.0.0.0:8089/">
 	<title> Signage - Admin </title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="dist/admin.css">
