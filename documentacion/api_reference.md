@@ -2,9 +2,25 @@
 
 
 
-__Tabla de contenidos__
+__Tabla de Contenidos__
 
-[TOC]
+- [Pantallas](#pantallas)
+  - [Obtener - GET](#obtener---get)
+  - [Crear - PUT](#crear---put)
+  - [Modificar - POST](#modificar---post)
+  - [Eliminar - DELETE](#eliminar---delete)
+- [Grupos](#grupos)
+  - [Obtener - GET](#obtener---get-1)
+  - [Crear - PUT](#crear---put-1)
+  - [Modificar - POST](#modificar---post-1)
+  - [Eliminar - DELETE](#eliminar---delete-1)
+- [Playlists](#playlists)
+  - [Obtener - GET](#obtener---get-2)
+  - [Crear - PUT](#crear---put-2)
+  - [Modificar - POST](#modificar---post-2)
+  - [Eliminar - DELETE](#eliminar---delete-2)
+
+
 
 ##### Punto de acceso a la API 
 

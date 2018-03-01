@@ -4,7 +4,25 @@
 
 __Tabla de contenidos__
 
-[TOC]
+- [Introduccion](#introduccion)
+
+- [Arquitectura general](#arquitectura-general)
+
+- [Organizacion de las pantallas](#organizacion-de-las-pantallas)
+
+- [Instalacion y primer uso](#instalacion-y-primer-uso)
+
+- [Agregando nuevas pantallas](#agregando-nuevas-pantallas)
+
+- [Esquema de la Base de Datos](#esquema-de-la-base-de-datos)
+
+- [API](#api)
+
+- [Comunicacion via Web Sockets](#comunicacion-via-web-sockets)
+
+- [Referencias](#referencias)
+
+  ​
 
 ## Introduccion
 
