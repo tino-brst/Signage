@@ -5,28 +5,20 @@
 __Tabla de contenidos__
 
 - [Introduccion](#introduccion)
-
 - [Arquitectura general](#arquitectura-general)
-
 - [Organizacion de las pantallas](#organizacion-de-las-pantallas)
-
 - [Instalacion y primer uso](#instalacion-y-primer-uso)
-
 - [Agregando nuevas pantallas](#agregando-nuevas-pantallas)
-
 - [Esquema de la Base de Datos](#esquema-de-la-base-de-datos)
-
 - [API](#api)
-
 - [Comunicacion via Web Sockets](#comunicacion-via-web-sockets)
-
 - [Referencias](#referencias)
 
-  ​
 
-## Introduccion
 
-La idea del desarrollo es poder mostrar contenido (imagenes, videos, etc) en distintas pantallas de la forma mas sencilla posible, sin conocimientos tecnicos por parte del usuario. Si quisiera mostrar una serie de imagenes por pantalla, los pasos a seguir (a grandes rasgos) serian los siguientes:
+## Introducción
+
+La idea del desarrollo es poder mostrar contenido (imágenes, videos, etc) en distintas pantallas de la forma mas sencilla posible, sin conocimientos técnicos por parte del usuario. Si quisiera mostrar una serie de imágenes por pantalla, los pasos a seguir (a grandes rasgos) serian los siguientes:
 
 1. Subir imagenes al sistema
 2. Crear una playlist que contenga esas imagenes
@@ -152,13 +144,6 @@ Durante el desarrollo de la API del sistema se uso [_Insomnia_](https://insomnia
 
 ## Referencias
 
+__Libros__
 
-
-
-
-
-
-
-
-
-
+![books](documentacion/images/books.png)
