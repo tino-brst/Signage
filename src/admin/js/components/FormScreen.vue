@@ -18,7 +18,7 @@
 					type="text">
 			</p>
 			<p>
-				<label> content </label> 
+				<label> playlist </label> 
 				<select v-model="playlist">
 					<option 
 						v-for="playlist in playlists" 
