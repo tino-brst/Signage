@@ -20,7 +20,7 @@ class Screens extends REST_Controller {
 		// valido la entrada
 		try {
 			v :: key('id', v :: numeric(), FALSE)  // (string $name, v $validator, boolean $mandatory = true)
-			  -> key('udid', v :: numeric(), FALSE)
+			  -> key('udid', v :: alnum(), FALSE)
 			  -> assert($this -> get());
 		} catch (NestedValidationException $exception) {
 			$this -> response(['errors' => $exception -> getMessagesIndexedByName()], REST_Controller :: HTTP_BAD_REQUEST);

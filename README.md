@@ -1,5 +1,13 @@
 # Digital Signage - Cooperativa
 
+
+
+__Tabla de contenidos__
+
+[TOC]
+
+## Introduccion
+
 La idea del desarrollo es poder mostrar contenido (imagenes, videos, etc) en distintas pantallas de la forma mas sencilla posible, sin conocimientos tecnicos por parte del usuario. Si quisiera mostrar una serie de imagenes por pantalla, los pasos a seguir (a grandes rasgos) serian los siguientes:
 
 1. Subir imagenes al sistema
@@ -22,7 +30,7 @@ El __udid__ (Unique Device Identifier) es parte del hardware de cada una de las 
 
 La idea de presentar el contenido de cada pantalla como simples _paginas web_ se basa en evitar el desarrollo de aplicaciones completas nativas para distintas plataformas, y hacer que lo maximo que se requiera de forma nativa es una aplicacion que muestra una vista web con el url del servidor y el udid correspondiente. En su version mas sencilla, cualquier dispositivo con un buscador alcanzaría para presentar contenido.
 
-### Tecnologias usadas
+__Tecnologias usadas__
 
 ![logos](documentacion/images/logos.png)
 
@@ -30,7 +38,7 @@ La idea de presentar el contenido de cada pantalla como simples _paginas web_ se
 
 ## Organizacion de las pantallas
 
-Ademas de poder asignar contenido a cada pantalla individualmente, se implemento un sistema de grupos analogo a un sistema de carpetas y archivos, a fin de poder editar el contenido de varias pantallas a la vez (por ej: todas aquellas en el grupo "cajas" muestren la playlist tal) entre otras cosas. Las pantallas se pueden juntar en grupos, dentro de los cuales pueden haber a su vez mas subgrupos y pantallas. Internamente esto se mantiene en la base de datos usando una implementacion de jerarquias conocida como __nested sets__ (explicada excelentemente por [Myke Hillyer](http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/)).
+Ademas de poder asignar contenido a cada pantalla individualmente, se implemento un sistema de grupos analogo a un sistema de carpetas y archivos, a fin de poder editar el contenido de varias pantallas a la vez (por ej: todas aquellas en el grupo _verduleria_ muestren la playlist _frutas de epoca_) entre otras cosas. Las pantallas se pueden juntar en grupos, dentro de los cuales pueden haber a su vez mas subgrupos y pantallas. Internamente esto se mantiene en la base de datos usando una implementacion de jerarquias conocida como __nested sets__ (explicada excelentemente por [Myke Hillyer](http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/)).
 
 ![nested_sets](documentacion/images/nested_sets.png)
 
@@ -110,7 +118,9 @@ Respecto a las playtlists e imagenes, la tabla `playlists_images` es la que las 
 
 
 
-## Signage API 
+## API 
+
+Durante el desarrollo de la API del sistema se uso [_Insomnia_](https://insomnia.rest) (open source y multiplataforma) para su acceso directo y testing. En la documentacion se pueden encontrar los [detalles de la API](documentacion/api_reference.md) y se provee del [workspace](documentacion/signage_workspace.json) exportado desde el programa con todos los requests ya formateados y listos para usarse.
 
 ![insomnia](documentacion/images/insomnia.png)
 

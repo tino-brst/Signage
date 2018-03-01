@@ -1,0 +1,530 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-03-01T08:34:27.813Z",
+	"__export_source": "insomnia.desktop.app:v5.14.7",
+	"resources": [
+		{
+			"_id": "wrk_578dccff80a14831a2ebd4b0bcc19139",
+			"created": 1517138350771,
+			"description": "",
+			"modified": 1518683988378,
+			"name": "Signage",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_5eee36efce194b9daca7df0495499599",
+			"color": null,
+			"created": 1517138350822,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1517138350822,
+			"name": "New Environment",
+			"parentId": "wrk_578dccff80a14831a2ebd4b0bcc19139",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_d7fadd3059ec49bf9572b78cb5033758",
+			"cookies": [],
+			"created": 1517138350902,
+			"modified": 1517138350902,
+			"name": "Default Jar",
+			"parentId": "wrk_578dccff80a14831a2ebd4b0bcc19139",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_c6601930874e44f59398590645c0d3e1",
+			"created": 1518267492540,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1518267492540,
+			"modified": 1518267492540,
+			"name": "Playlists",
+			"parentId": "wrk_578dccff80a14831a2ebd4b0bcc19139",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_7f2346fcb55e4a5b8b6c717db6754691",
+			"created": 1518549835934,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1518549835934,
+			"modified": 1518683544670,
+			"name": "Groups",
+			"parentId": "wrk_578dccff80a14831a2ebd4b0bcc19139",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_f9a6e602a6614cd2934c81d743b1ea6a",
+			"created": 1518633925017,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1518408664237,
+			"modified": 1518633932894,
+			"name": "Screens",
+			"parentId": "wrk_578dccff80a14831a2ebd4b0bcc19139",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_248736d03cb54c46a74b99366d432190",
+			"created": 1519047140766,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1518267492490,
+			"modified": 1519891597740,
+			"name": "Images",
+			"parentId": "wrk_578dccff80a14831a2ebd4b0bcc19139",
+			"_type": "request_group"
+		},
+		{
+			"_id": "env_9c7497ee5b7244fea7b5c204c23bbf59",
+			"color": "#ffad23",
+			"created": 1518683707361,
+			"data": {
+				"base_url": "http://pasante.sis.cooperativaobrera.coop/Signage/index.php/api/"
+			},
+			"isPrivate": false,
+			"modified": 1519888704967,
+			"name": "Coop",
+			"parentId": "env_5eee36efce194b9daca7df0495499599",
+			"_type": "environment"
+		},
+		{
+			"_id": "env_53a56cbf84a740fd93d39760c6b74eac",
+			"color": "#277ccb",
+			"created": 1518683717659,
+			"data": {
+				"base_url": "http://localhost:8000/index.php/api/"
+			},
+			"isPrivate": false,
+			"modified": 1519888693553,
+			"name": "Localhost",
+			"parentId": "env_5eee36efce194b9daca7df0495499599",
+			"_type": "environment"
+		},
+		{
+			"_id": "req_c0af4821519f470c9ab3c818f62eeed2",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": ""
+			},
+			"created": 1517209765682,
+			"description": "",
+			"headers": [],
+			"metaSortKey": -1517209765682,
+			"method": "GET",
+			"modified": 1519893157200,
+			"name": "get",
+			"parameters": [
+				{
+					"disabled": false,
+					"id": "pair_04a12f393e374ebb8972f42eec52488c",
+					"name": "id",
+					"value": "1"
+				},
+				{
+					"disabled": false,
+					"id": "pair_5a71909670c24a7188384b2c07d71364",
+					"name": "includeItems",
+					"value": "true"
+				}
+			],
+			"parentId": "fld_c6601930874e44f59398590645c0d3e1",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}playlists",
+			"_type": "request"
+		},
+		{
+			"_id": "req_43dab5694dde4b709af665a9910e4859",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"--\"\n}"
+			},
+			"created": 1518424462875,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_7c4214d151e646afa6c0fb7fe8c14e10",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1517209765632,
+			"method": "PUT",
+			"modified": 1519893161135,
+			"name": "create",
+			"parameters": [],
+			"parentId": "fld_c6601930874e44f59398590645c0d3e1",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}playlists",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d2ff01e764834cc69324911d4ac5d829",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"id\": \"28\",\n\t\"name\": \"sdñfl\",\n\t\"items\": [\n\t\t{\n\t\t\t\"id\": 5\n\t\t},\n\t\t{\n\t\t\t\"id\": 6\n\t\t}\n\t]\n}"
+			},
+			"created": 1518431493647,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_8d1b3ee4a8ce49f8a1611e9f1f20effe",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1517209765582,
+			"method": "POST",
+			"modified": 1519893163215,
+			"name": "update",
+			"parameters": [],
+			"parentId": "fld_c6601930874e44f59398590645c0d3e1",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}playlists",
+			"_type": "request"
+		},
+		{
+			"_id": "req_500422e376f846bd8b5b6a8578bfb8ae",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": ""
+			},
+			"created": 1518435593228,
+			"description": "",
+			"headers": [],
+			"metaSortKey": -1517209765532,
+			"method": "DELETE",
+			"modified": 1519893165350,
+			"name": "delete",
+			"parameters": [
+				{
+					"disabled": false,
+					"id": "pair_04a12f393e374ebb8972f42eec52488c",
+					"name": "id",
+					"value": "30"
+				}
+			],
+			"parentId": "fld_c6601930874e44f59398590645c0d3e1",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}playlists",
+			"_type": "request"
+		},
+		{
+			"_id": "req_5146173d55134bdf9971d925e134114a",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"parentId\": \"74\",\n\t\"name\": \"dummy group\",\n\t\"extraFields\": {}\n}"
+			},
+			"created": 1518549842242,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dd140785c5c644e3bfd5b86d546a12d8",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1518549842242,
+			"method": "PUT",
+			"modified": 1519893138965,
+			"name": "create",
+			"parameters": [],
+			"parentId": "fld_7f2346fcb55e4a5b8b6c717db6754691",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}groups",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a83e0ac6fe824abaa287cc96a70bae30",
+			"authentication": {},
+			"body": {},
+			"created": 1518569841018,
+			"description": "",
+			"headers": [],
+			"metaSortKey": -1517879803962,
+			"method": "DELETE",
+			"modified": 1519893143265,
+			"name": "delete",
+			"parameters": [
+				{
+					"disabled": false,
+					"id": "pair_2fc3e623fd01480f83631ae59e4566b6",
+					"name": "id",
+					"value": "75"
+				}
+			],
+			"parentId": "fld_7f2346fcb55e4a5b8b6c717db6754691",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}groups",
+			"_type": "request"
+		},
+		{
+			"_id": "req_dae4eb459641401fb5fc334fa0484c6c",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"id\": 75,\n\t\"name\": \"lalala\"\n}"
+			},
+			"created": 1518594113394,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dd140785c5c644e3bfd5b86d546a12d8",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1518214823102,
+			"method": "POST",
+			"modified": 1519893141312,
+			"name": "update",
+			"parameters": [],
+			"parentId": "fld_7f2346fcb55e4a5b8b6c717db6754691",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}groups",
+			"_type": "request"
+		},
+		{
+			"_id": "req_38f8a3b4ff7c4469a8bf2475a61e5c64",
+			"authentication": {},
+			"body": {},
+			"created": 1518596897799,
+			"description": "",
+			"headers": [],
+			"metaSortKey": -1518549842292,
+			"method": "GET",
+			"modified": 1519893134497,
+			"name": "get",
+			"parameters": [
+				{
+					"disabled": false,
+					"id": "pair_2fc3e623fd01480f83631ae59e4566b6",
+					"name": "id",
+					"value": ""
+				},
+				{
+					"id": "pair_873933faeb674b6eb7a78ed211530a56",
+					"name": "includePath",
+					"value": "true"
+				},
+				{
+					"id": "pair_dc5678d07aa444c8a478ad7f48c860e5",
+					"name": "includeContent",
+					"value": "true"
+				}
+			],
+			"parentId": "fld_7f2346fcb55e4a5b8b6c717db6754691",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}groups",
+			"_type": "request"
+		},
+		{
+			"_id": "req_295b2dd2ede44862b87953304f543f35",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"parentId\": \"75\",\n\t\"name\": \"screen 2\",\n\t\"extraFields\": {\n\t\t\"playlist_id\": 1,\n\t\t\"udid\": \"456\"\n\t}\n}"
+			},
+			"created": 1518633925023,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dd140785c5c644e3bfd5b86d546a12d8",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1518549842242,
+			"method": "PUT",
+			"modified": 1519893150157,
+			"name": "create",
+			"parameters": [],
+			"parentId": "fld_f9a6e602a6614cd2934c81d743b1ea6a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}screens",
+			"_type": "request"
+		},
+		{
+			"_id": "req_46cf8f6cc53b4d6a8464fe7cce79f292",
+			"authentication": {},
+			"body": {},
+			"created": 1518633925028,
+			"description": "",
+			"headers": [],
+			"metaSortKey": -1517879803962,
+			"method": "DELETE",
+			"modified": 1519893154270,
+			"name": "delete",
+			"parameters": [
+				{
+					"disabled": false,
+					"id": "pair_2fc3e623fd01480f83631ae59e4566b6",
+					"name": "id",
+					"value": "67"
+				}
+			],
+			"parentId": "fld_f9a6e602a6614cd2934c81d743b1ea6a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}screens",
+			"_type": "request"
+		},
+		{
+			"_id": "req_063a81fa42094ed896d61e74bd8f286c",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"id\": 67,\n\t\"extraFields\": {\n\t\t\"playlist_id\": 2\n\t}\n}"
+			},
+			"created": 1518633925032,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dd140785c5c644e3bfd5b86d546a12d8",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1518214823102,
+			"method": "POST",
+			"modified": 1519893152398,
+			"name": "update",
+			"parameters": [],
+			"parentId": "fld_f9a6e602a6614cd2934c81d743b1ea6a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}screens",
+			"_type": "request"
+		},
+		{
+			"_id": "req_79d4d0c183fa40068c9f99f9c1ea6c95",
+			"authentication": {},
+			"body": {},
+			"created": 1518633925036,
+			"description": "",
+			"headers": [],
+			"metaSortKey": -1518549842292,
+			"method": "GET",
+			"modified": 1519893147812,
+			"name": "get",
+			"parameters": [
+				{
+					"disabled": true,
+					"id": "pair_2fc3e623fd01480f83631ae59e4566b6",
+					"name": "id",
+					"value": "71"
+				},
+				{
+					"id": "pair_e08c2752ad944168965a3f21eb1de11d",
+					"name": "udid",
+					"value": "221"
+				}
+			],
+			"parentId": "fld_f9a6e602a6614cd2934c81d743b1ea6a",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}screens",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8d33cc79a7dc4a8abf490b30df10a431",
+			"authentication": {},
+			"body": {},
+			"created": 1519047157142,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_9b05edffcaa94474bdf6ea67620df58d",
+					"name": "Content-Type",
+					"value": "multipart/form-data"
+				}
+			],
+			"metaSortKey": -1519047157142,
+			"method": "GET",
+			"modified": 1519890383829,
+			"name": "get",
+			"parameters": [
+				{
+					"disabled": false,
+					"id": "pair_8d1d1e01fce642709b4bb37eb7c17fbc",
+					"name": "id",
+					"value": "1"
+				}
+			],
+			"parentId": "fld_248736d03cb54c46a74b99366d432190",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}images",
+			"_type": "request"
+		},
+		{
+			"_id": "req_9e17a312d58e4f89957232e84e5fe8ec",
+			"authentication": {},
+			"body": {},
+			"created": 1519047422500,
+			"description": "",
+			"headers": [],
+			"metaSortKey": -1519047422500,
+			"method": "DELETE",
+			"modified": 1519047477222,
+			"name": "delete",
+			"parameters": [
+				{
+					"disabled": true,
+					"id": "pair_561d2bc19bc44f83a08a92c8f069b82f",
+					"name": "id",
+					"value": "8"
+				}
+			],
+			"parentId": "fld_248736d03cb54c46a74b99366d432190",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ base_url  }}images",
+			"_type": "request"
+		}
+	]
+}
