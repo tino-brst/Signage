@@ -45,10 +45,12 @@
 
 <script>
 import axios from 'axios';
+import io from 'socket.io-client';
 
 export default {
 	data() {
 		return {
+			socket: io(socketUrl),
 			screen: null,
 			playlist: null,
 			currentItemIndex: 0,
@@ -65,7 +67,11 @@ export default {
 		}
 	},
 	created() {
-		this.$socket.emit('screenConnected', udid);
+		// suscripcion a eventos de websockets
+		this.socket.on('updateScreen', () => { this.updateScreen() });
+		this.socket.on('playlistUpdated', (playlistId) => { this.playlistUpdated(playlistId) });
+		// envio de UDID y actualizacion de pantalla
+		this.socket.emit('screenConnected', udid);
 		this.updateScreen();
 	},
 	methods: {
@@ -88,7 +94,7 @@ export default {
 			// ...emit(eventName, sentData, callbackFunction)
 			// callbackFunction <- su ejecucion se inicia desde el servidor 
 			this.screen = null;
-			this.$socket.emit('screenSetup', udid, (pin) => {
+			this.socket.emit('screenSetup', udid, (pin) => {
 				// presento pantalla de setup
 				this.setupPin = pin;
 				this.showSetup = true;
@@ -109,19 +115,14 @@ export default {
 
 				});
 		},
-		nextItem() {
-			this.currentItemIndex = (this.currentItemIndex + 1) % this.playlist.items.length;
-		}
-	},
-	sockets: {
-		updateScreen() {
-			this.updateScreen();
-		},
 		playlistUpdated(playlistId) {
 			if (screen !== null && playlistId === this.screen.playlist_id) {
 				this.loadContent();
 			}
-		}
+		},
+		nextItem() {
+			this.currentItemIndex = (this.currentItemIndex + 1) % this.playlist.items.length;
+		},
 	}
 }
 </script>
@@ -219,10 +220,12 @@ export default {
 	}
 	.items-slide-enter {
 		transform: translateY(100%);
+		-webkit-transform: translateY(100%);
 		opacity:  1;
 	}
 	.items-slide-enter-to {
 		transform: translateY(0%);
+		-webkit-transform: translateY(0%);
 		z-index: 2;
 		opacity: 1;
 	}
@@ -231,6 +234,7 @@ export default {
 	}
 	.items-slide-leave-to {
 		transform: translateY(-80%);
+		-webkit-transform: translateY(-80%);
 		opacity: 0;
 		z-index: 1;
 	}

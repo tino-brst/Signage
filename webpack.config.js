@@ -13,13 +13,6 @@ module.exports = {
 		screen: [
 			'./src/screen/js/main.js',
 			// ... css para main.js
-		], 
-		vendor: [
-			'vue', 
-			'axios', 
-			'vuex',
-			'vue-router',
-			'babel-polyfill'
 		]
 	},
 	output: {
@@ -57,7 +50,7 @@ module.exports = {
 		]
 	},
 	plugins: [
-		// definicion de constantes globales
+		// definicion de constantes globales (Webpack las reemplaza durante la compilacion)
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: '"development"'
@@ -67,11 +60,6 @@ module.exports = {
 		// limpia carpeta de salida (dist) ante cada recompilacion
 		// (evito acumular compilaciones viejas)
 		new CleanWebpackPlugin(['dist']),
-		// junto todas las librerias en uso en un archivo aparte
-		// (en app.js queda solo el codigo de la applicacion)
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'vendor'
-		}),
 		// extraccion de estilos a archivo aparte
 		new ExtractTextPlugin("[name].css")
 	],
@@ -87,15 +75,14 @@ module.exports = {
 		// (y no al webpack-dev-server que solo tiene los archivos compilados)
 		port: 8089,
 		proxy: {
-			"*": "http://pasante.sis.cooperativaobrera.coop/Signage",
-			// "*": "http://0.0.0.0:8000",
+			"*": "http://localhost:8000",
 		},
 		noInfo: true,
 		overlay: true
 	},
-	// ante un error en el codigo final empaquetado "error en linea 3.532 bundle.js" 
+	// ante un error en el codigo final empaquetado "error en linea 3.532 admin.js" 
 	// (que incluye varias librerias, etc), anda a saber con que linea del codigo original 
-	// se corresponde. Source maps mapean el codigo original al empaquetado para apuntar 
+	// se corresponde. Source maps mapean el codigo original al empaquetado y apuntan 
 	// los errores a su origen ("error en linea 142 archivoTal.js").
 	devtool: '#eval-source-map'
 };
