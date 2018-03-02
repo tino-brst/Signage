@@ -20,7 +20,7 @@ __Tabla de contenidos__
 __Repos relacionados__
 
 - [Servidor de websockets](https://github.com/AgustinBrst/Websockets_server.git)
-- [Aplicacion cliente para Android](https://github.com/AgustinBrst/Android_client.git)
+- [Aplicación cliente para Android](https://github.com/AgustinBrst/Android_client.git)
 
 
 
@@ -38,9 +38,9 @@ Todos esos pasos se realizan desde el __administrador__, donde se organiza el co
 
 ## Arquitectura general
 
-El back-end otorga las vistas al administrador y a las pantallas, y ademas brinda acceso a la API del sistema para la creacion de playlists, agregado de nuevas pantallas, edicion de su contenido, etc. 
+El back-end otorga las vistas al administrador y a las pantallas, y ademas brinda acceso a la API del sistema para la creación de playlists, agregado de nuevas pantallas, edición de su contenido, etc. 
 
-Para la comunicacion en tiempo real entre el administrador y las pantallas (para avisar a una pantalla que su contenido fue modificado por ejemplo) se utiliza comunicacion via web-sockets, evitando un sistema de polling constante y anunciando cambios solo cuando es necesario.
+Para la comunicación en tiempo real entre el administrador y las pantallas (para avisar a una pantalla que su contenido fue modificado por ejemplo) se utiliza comunicación via web-sockets, evitando un sistema de polling constante y anunciando cambios solo cuando es necesario.
 
 ![arquitectura](documentacion/images/arquitectura.png)
 
@@ -54,7 +54,7 @@ __Tecnologias usadas__
 
 
 
-## Organizacion de las pantallas
+## Organización de las pantallas
 
 Ademas de poder asignar contenido a cada pantalla individualmente, se implemento un sistema de grupos análogo a un sistema de carpetas y archivos, a fin de poder editar el contenido de varias pantallas a la vez (por ej: todas aquellas en el grupo verdulería muestren la playlist _frutas de época) entre otras cosas. Las pantallas se pueden juntar en grupos, dentro de los cuales pueden haber a su vez mas subgrupos y pantallas. Internamente esto se mantiene en la base de datos usando una implementación de jerarquías conocida como __nested sets__ (explicada excelentemente por [Myke Hillyer](http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/)).
 
@@ -62,12 +62,12 @@ Ademas de poder asignar contenido a cada pantalla individualmente, se implemento
 
 
 
-## Instalacion y primer uso
+## Instalación y primer uso
 
-__Creacion e inicializacion de la Base de Datos__
+Creación e inicialización de la Base de Datos__
 
 1. Crear base de datos con el nombre `signage`
-2. Crear tablas y vistas base a partir del [codigo adjunto](documentacion/db_definition.sql)
+2. Crear tablas y vistas base a partir del [código adjunto](documentacion/db_definition.sql)
 3. Crear [contenido para el demo](documentacion/db_demo_items.sql)
 
 __Servidor de WebSockets__
@@ -114,13 +114,13 @@ Respecto a las pantallas, durante la inicialización de la base de datos se crea
 
 La idea era que este proceso sea lo mas amigable posible, y se termino cayendo en la misma forma que ya se ve usada en otras soluciones de _digital signage_, cuyos pasos (partiendo de la instalación anterior) consisten en:
 
-1. Abrir una nueva ventana del buscador con el url [`http://localhost:8000/index.php/signage/screen/`](http://localhost:8000/index.php/signage/screen/) con un `udid` agregado al final, donde este puede ser una cadena alfanumerica cualquiera (recordando que `123`, `456` y `789` ya corresponden a las pantallas que venian por defecto). La pantalla deberia pasar a mostrar un __pin de configuracion__.
+1. Abrir una nueva ventana del buscador con el url [`http://localhost:8000/index.php/signage/screen/`](http://localhost:8000/index.php/signage/screen/) con un `udid` agregado al final, donde este puede ser una cadena alfanumérica cualquiera (recordando que `123`, `456` y `789` ya corresponden a las pantallas que venían por defecto). La pantalla debería pasar a mostrar un __pin de configuración.
 
-   > Cabe mencionar que para el caso de ya estar usando un SmartTV, este paso consistiria de la instalacion de la aplicacion y su posterior ejecucion.
+   > Cabe mencionar que para el caso de ya estar usando un SmartTV, este paso consistiría de la instalación de la aplicación y su posterior ejecución.
 
-2. En el administrador, bajo la pestaña __Groups and Screens__ se presiona __+ add screen__ y se completa la informacion con el pin de la pantalla, un nombre (como "Pantalla del sector de juguetes de Star Wars") y una playlist para que esta reproduzca.
+2. En el administrador, bajo la pestaña __Groups and Screens__ se presiona __+ add screen__ y se completa la información con el pin de la pantalla, un nombre (como "Pantalla del sector de juguetes de Star Wars") y una playlist para que esta reproduzca.
 
-3.  Presionando __done__ se termina el proceso y la pantalla ahora ya deberia estar mostrar el contenido correspondiente a la playlist seleccionada.
+3.  Presionando __done__ se termina el proceso y la pantalla ahora ya debería estar mostrar el contenido correspondiente a la playlist seleccionada.
 
 
 
@@ -128,7 +128,7 @@ La idea era que este proceso sea lo mas amigable posible, y se termino cayendo e
 
 Respecto a la organización de la información en la base de datos, en las tablas `directory`, `screens_data` y `groups_data` se mantiene la jerarquía (o directorio) de grupos y pantallas (con la implementación de _nested sets_ mencionada anteriormente), donde la primer tabla mantiene la información base común a todo _nodo_ en el directorio, mientras que la segunda y la tercera completan esa información con detalles específicos a cada tipo de nodo (_grupo_ o _pantalla_). Las vistas `groups` y `screens` unifican esa información para facilitar el acceso.
 
-Respecto a las playtlists e imagenes, la tabla `playlists_images` es la que las contecta y mantiene su relacion _muchos a muchos_, detallando el orden de las imagenes en cada playlist (y como posible extension, la duracion de presentacion de cada una).
+Respecto a las playlists e imágenes, la tabla `playlists_images` es la que las conecta y mantiene su relación _muchos a muchos_, detallando el orden de las imágenes en cada playlist (y como posible extension, la duración de presentación de cada una).
 
 
 
@@ -146,20 +146,20 @@ Durante el desarrollo de la API del sistema se uso [_Insomnia_](https://insomnia
 
 ## Cliente Android
 
-La aplicacion cliente para Android fue desarrollada apuntando a la version KitKat (4.4) y consiste simplemente de una vista web con acceso a la url del contenido a presentar por las pantallas (`.../screen/` + `udid`), con algunas caracteristicas orientadas al uso en _digital signage_:
+La aplicación cliente para Android fue desarrollada apuntando a la version KitKat (4.4) y consiste simplemente de una vista web con acceso a la url del contenido a presentar por las pantallas (`.../screen/` + `udid`), con algunas características orientadas al uso en _digital signage_:
 
-- Corre en modo pantalla completa, quitando menues de navegacion, barra superior, etc.
-- Ante un reinicio, se ejecute de forma automatica.
+- Corre en modo pantalla completa, quitando menues de navegación, barra superior, etc.
+- Ante un reinicio, se ejecute de forma automática.
 - Evita que la pantalla se suspenda.
 
 A la hora de estar usando el emulador de Android Studio, el dispositivo emulado tiene acceso al servidor local corriendo en `localhost` a travez de la IP 10.0.2.2 (de hecho, en el código de la aplicación, la url de la vista web apunta a esa IP), por lo que se debe hacer un pequeño cambio a las vistas que provee Codeigniter. En el archivo `application\view\screen.php` comentar las lineas `10` y `20` y descomentar las que les siguen.
 
 ```
-10|		<base href="http://localhost:8089/">
-11|		<!-- <base href="http://10.0.2.2:8089/"> -->
-    ...
-20|		var socketUrl = "http://localhost:4000";
-21|		// var socketUrl = "http://10.0.2.2:4000";
+10|   <base href="http://localhost:8089/">
+11|   <!-- <base href="http://10.0.2.2:8089/"> -->
+
+20|   var socketUrl = "http://localhost:4000";
+21|   // var socketUrl = "http://10.0.2.2:4000";
 ```
 
 
@@ -183,4 +183,4 @@ __Librerías usadas__
 
 __Bibliografía__
 
-![books](documentación/images/books.png)
+![books](documentacion/images/books.png)
