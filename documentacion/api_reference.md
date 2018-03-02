@@ -42,7 +42,7 @@ Siguiendo convenciones establecidas para códigos de respuesta HTTP, a continuac
 ## Pantallas
 
 ##### Obtener - GET
-```json
+```
 query parameters
 	· id / udid (int)   // obtengo info de pantalla a partir de
 						// su id de directorio o udid de dispositivo
@@ -59,7 +59,7 @@ response - 200
 ```
 
 ##### Crear - PUT
-```json
+```
 request
 	{
 		"parentId": 12,
@@ -83,7 +83,7 @@ response - 201
 ```
 
 ##### Modificar - POST
-```json
+```
 request
 	{
 		"id": 71,
@@ -108,7 +108,7 @@ response - 200
 ```
 
 ##### Eliminar - DELETE
-```json
+```
 query parameters
 	· id (int)
 response - 204
@@ -119,7 +119,7 @@ response - 204
 ## Grupos
 
 ##### Obtener - GET
-```json
+```
 query parameters
 	· id (int) 				// dejando id: "" (campo vacio) retorna el grupo raiz
 	· includePath (bool) 	// opcional: incluye el path del grupo
@@ -152,7 +152,7 @@ response - 200
 ```
 
 ##### Crear - PUT
-```json
+```
 request
 	{
 		"parentId": 12,
@@ -174,7 +174,7 @@ response - 201
 ```
 
 ##### Modificar - POST
-```json
+```
 request
 	{
 		"id": 23,
@@ -196,7 +196,7 @@ response - 200
 ```
 
 ##### Eliminar - DELETE
-```json
+```
 query parameters
 	· id (int)
 response - 204
@@ -207,7 +207,7 @@ response - 204
 ## Playlists
 
 ##### Obtener - GET
-```json
+```
 query parameters
 	· id (int) 			  // opcional: una playlist / todas
 	· includeItems (bool) // opcional: incluye items de la/s playlists
@@ -229,7 +229,7 @@ response - 200
 ```
 
 ##### Crear - PUT
-```json
+```
 request
 	{
 		"name": "hogar"
@@ -243,7 +243,7 @@ response - 201
 ```
 
 ##### Modificar - POST
-```json
+```
 request
 	{
 		"id": "32",
@@ -273,7 +273,7 @@ response - 200
 ```
 
 ##### Eliminar - DELETE
-```json
+```
 query parameters
 	· id (int)
 response - 204
